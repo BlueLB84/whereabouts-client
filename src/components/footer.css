@@ -1,0 +1,18 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: #aaa;
+}
+
+ul {
+	list-style-type: none;
+}
+
+li {
+  display: inline-block;
+  text-align: center;
+  width: 75px;
+}
