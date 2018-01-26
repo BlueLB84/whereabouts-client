@@ -5,7 +5,7 @@ import './whereabouts.css';
 export default function Whereabouts() {
     return (
         <div className="whereabouts">
-            <h1>Whereabouts</h1>
+            <h1>Whereabouts App</h1>
         </div>
     );
 }
