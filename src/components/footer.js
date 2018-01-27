@@ -5,7 +5,7 @@ import './footer.css';
 export default function Footer(props) {
     return (
         <div className="footer">
-            <footer role="content-info">
+            <footer>
 				<ul>
 					<li>{props.login}</li>
 					<li><Link to='/signup'>{props.signup}</Link></li>

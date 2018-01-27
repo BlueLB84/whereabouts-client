@@ -1,7 +1,6 @@
 import React from 'react';
 import TitleCard from './title-card';
 import SubtitleCard from './subtitle-card';
-import SignupForm from './signup-form';
 import {Link} from 'react-router-dom';
 import './landing-page.css';
 

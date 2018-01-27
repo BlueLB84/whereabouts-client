@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import TitleCard from './title-card';
 import TeamMotto from './team-motto';
 import './user-home-page.css';
@@ -11,6 +12,7 @@ export default function UserHome() {
             	<TeamMotto motto='This is the bestest team!' />
             </header>
             <p>Welcome to the user home page!</p>
+            <Link to='/'>Whereabouts Home</Link>
         </div>
     );
 };

@@ -49,6 +49,7 @@ export default function SignupForm() {
 			        </form>
 			    </div>
 	      	</section>
+	      	<Link to='/'>Whereabouts Home</Link>
         </div>
     );
 };
