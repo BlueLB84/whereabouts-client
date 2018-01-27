@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 import './nav.css';
 
 export default function Nav(props) {
@@ -8,7 +8,7 @@ export default function Nav(props) {
             <nav role="navigation">
 		      <ul>
 		        <li>{props.login}</li>
-		        <li>{props.signup}</li>
+		        <li><Link to='/signup'>{props.signup}</Link></li>
 		      </ul>  
 		    </nav>
         </div>

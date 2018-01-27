@@ -1,0 +1,15 @@
+.signup-form {
+	text-align: center;
+}
+
+form > div {
+	margin-bottom: 10px;
+}
+
+label {
+	margin-right: 5px;
+}
+
+p {
+	padding-bottom: 15px;
+}
