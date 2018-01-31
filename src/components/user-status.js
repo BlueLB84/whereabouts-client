@@ -6,7 +6,7 @@ export default function UserStatus(props) {
     return (
         <div className="user-status">
         	<div className="usr-pic">
-	        	<img src={props.imgSrc}></img>
+	        	<img src={props.imgSrc} alt="user icon"></img>
 	        	<p>{props.usrname}</p>
         	</div>
         	<ul>
