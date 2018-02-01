@@ -1,7 +1,7 @@
 import React from 'react';
-import TitleCard from './title-card';
-import SubtitleCard from './subtitle-card';
 import {Link} from 'react-router-dom';
+import TitleCard from '../../Headers/TitleCard/title-card';
+import SubtitleCard from '../../Headers/SubtitleCard/subtitle-card';
 import './landing-page.css';
 
 export default function LandingPage(props) {

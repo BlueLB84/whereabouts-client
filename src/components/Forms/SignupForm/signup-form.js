@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import TitleCard from './title-card';
-import SubtitleCard from './subtitle-card';
+import TitleCard from '../../Headers/TitleCard/title-card';
+import SubtitleCard from '../../Headers/SubtitleCard/subtitle-card';
 import './signup-form.css';
 
 export default function SignupForm() {
@@ -19,7 +19,7 @@ export default function SignupForm() {
 			        <p>Start a new Whereabouts team! <br></br>
 			        <em>or</em><br></br>
 			        Enter the name of an existing team that you want to join!</p>
-			        <form class='signup-form'>
+			        <form className='signup-form'>
 			            <div>
 			            	<label for="team-name">Team name</label>
 			            	<input placeholder='Team Name' type="text" name='team-name' id='team-name' />

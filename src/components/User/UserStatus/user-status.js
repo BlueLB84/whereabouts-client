@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 import './user-status.css';
 
 export default function UserStatus(props) {
@@ -10,9 +10,11 @@ export default function UserStatus(props) {
 	        	<p>{props.usrname}</p>
         	</div>
         	<ul>
+        		<li><em>[Date/Time]</em></li>
         		<li>Where: {props.location}</li>
         		<li>What: {props.activity}</li>
         	</ul>
+        	<button type="button">Update Your Whereabouts</button>
         </div>
     );
 };

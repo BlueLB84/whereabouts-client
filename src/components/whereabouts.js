@@ -4,11 +4,11 @@ import {
     Route,
     Switch
 } from 'react-router-dom';
-import Nav from './nav';
-import LandingPage from './landing-page';
-import UserHome from './user-home-page';
-import SignupForm from './signup-form';
-import Footer from './footer';
+import Nav from './Nav/nav';
+import LandingPage from './Pages/LandingPage/landing-page';
+import UserHome from './Pages/UserHome/user-home-page';
+import SignupForm from './Forms/SignupForm/signup-form';
+import Footer from './Footer/footer';
 import './whereabouts.css';
 
 export default function Whereabouts() {
