@@ -11,7 +11,7 @@ export class UserLandingPage extends React.Component {
     
     handleTeamClick(index) {
         console.log(`index is: ${index}`);
-        this.props.history.push(`/user-team-home/team-${index}`);
+        this.props.history.push(`/team/team-${index}`);
     }
 
     render() {
@@ -41,7 +41,7 @@ export class UserLandingPage extends React.Component {
 };
 
 const mapStateToProps = state => ({
-    teams: state.user.teams
+    teams: state.teams
 });
 
 export default connect(mapStateToProps)(UserLandingPage);
