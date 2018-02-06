@@ -2,13 +2,18 @@ import * as actions from '../actions';
 
 const initialState = {
 	bulletins: [{
-		text: "This is a bulletin post test."
+		text: "This is an important message from an important person on your team."
 	},
 	{
-		text: "This is another bulletin for your viewing."
+		text: "This is another important message from an yet another semi-important person on your team."
 	}],
     whereabouts: [{
-        usrname: "Jo John",
+        usrname: "Yoothee Yuser",
+        location: "A secret location",
+        activity: "A secret project",
+        imgSrc: "https://picsum.photos/150"
+    },{
+        usrname: "Robby Raspberry",
         location: "Room 22",
         activity: "Weekly design meeting",
         imgSrc: "https://picsum.photos/150"

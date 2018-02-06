@@ -7,7 +7,7 @@ import './user-whereabouts.css';
 
 export default function UserWhereabouts(props) {
     return (
-    	<div className="user-whereabouts">
+    	<div>
             <UserImgUsrname imgSrc={props.imgSrc} usrname={props.usrname} />
             <UserWhereaboutsStatus  location={props.location} activity={props.activity} />
         </div>

@@ -8,11 +8,16 @@ import TeamSnippet from '../../Team/TeamSnippet/team-snippet';
 import './user-landing-page.css';
 
 export class UserLandingPage extends React.Component {
+    
+    handleTeamClick(index) {
+        console.log(`index is: ${index}`);
+        this.props.history.push(`/user-team-home/team-${index}`);
+    }
 
     render() {
         const teams = this.props.teams.map((team, index) => (
             <li className="user-team" key={index}>
-                <TeamSnippet {...team} />
+                <TeamSnippet {...team} index={index} teamId={index} onClick={this.handleTeamClick.bind(this, index)} />
             </li>
         ));
     

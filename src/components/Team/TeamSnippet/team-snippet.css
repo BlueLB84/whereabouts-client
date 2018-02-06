@@ -4,4 +4,13 @@ img {
 
 .team-snippet {
 	width: 100%;
+	padding: 10px;
+}
+
+.team-snippet:nth-child(odd) {
+	background-color: #bbb;
+}
+
+img:hover, h4:hover {
+	cursor: pointer;
 }

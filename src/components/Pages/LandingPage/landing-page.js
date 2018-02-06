@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import TitleCard from '../../Headers/TitleCard/title-card';
 import SubtitleCard from '../../Headers/SubtitleCard/subtitle-card';
 import './landing-page.css';
 

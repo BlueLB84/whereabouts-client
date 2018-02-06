@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import TitleCard from '../../Headers/TitleCard/title-card';
 import SubtitleCard from '../../Headers/SubtitleCard/subtitle-card';
 import './signup-form.css';
 
@@ -11,6 +10,7 @@ export default function SignupForm() {
             	<SubtitleCard />
             </header>
 	        <section className="signup-form">
+		        <p className="disclaimer">NOTE: This signup form is not functional and will be replaced by Firebase Auth UI</p>
 		        <header>
 		        	<h3>Join Whereabouts!</h3>
 		        </header>

@@ -12,6 +12,6 @@ export default function UserImgUsrname(props) {
 };
 
 UserImgUsrname.defaultProps = {
-    imgSrc: '',
+    imgSrc: 'https://picsum.photos/150',
     usrname: 'Yoothee Yuser'
 };

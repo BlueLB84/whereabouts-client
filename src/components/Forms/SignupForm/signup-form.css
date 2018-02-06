@@ -13,3 +13,8 @@ label {
 p {
 	padding-bottom: 15px;
 }
+
+.disclaimer {
+	color: red;
+	font-weight: bold;
+}

@@ -10,7 +10,7 @@ export default function Footer(props) {
 					<li>{props.login}</li>
 					<li><Link to='/signup'>{props.signup}</Link></li>
 					<li>About</li>
-					<li><i class="fa fa-github" aria-hidden="true"></i> BlueLB84</li>
+					<li><i className="fa fa-github" aria-hidden="true"></i> BlueLB84</li>
 				</ul> 
 		    </footer>
         </div>

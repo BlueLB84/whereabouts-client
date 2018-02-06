@@ -9,6 +9,7 @@ export default function Nav(props) {
 		      <ul>
 		        <li>{props.login}</li>
 		        <li><Link to='/signup'>{props.signup}</Link></li>
+		        <li><Link to='/user-landing/demo'>Demo User Landing Page</Link></li>
 		      </ul>  
 		    </nav>
         </div>
