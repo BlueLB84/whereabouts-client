@@ -20,7 +20,7 @@ export default function Whereabouts() {
                     <main>
                         <Switch>
                             <Route exact path='/' component={LandingPage} />
-                            <Route exact path='/' component={UserLandingPage} />
+                            <Route exact path='/user-landing' component={UserLandingPage} />
                             <Route exact path='/user-home' component={UserHome} />
                             <Route exact path='/signup' component={SignupForm} />
                         </Switch>

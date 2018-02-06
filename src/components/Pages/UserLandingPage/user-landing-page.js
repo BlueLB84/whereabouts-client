@@ -11,7 +11,7 @@ export class UserLandingPage extends React.Component {
 
     render() {
         const teams = this.props.teams.map((team, index) => (
-            <li className="user-teams" key={index}>
+            <li className="user-team" key={index}>
                 <TeamSnippet {...team} />
             </li>
         ));
@@ -36,9 +36,7 @@ export class UserLandingPage extends React.Component {
 };
 
 const mapStateToProps = state => ({
-    users: {
-        teams: state.users.teams
-    }
+    teams: state.user.teams
 });
 
 export default connect(mapStateToProps)(UserLandingPage);

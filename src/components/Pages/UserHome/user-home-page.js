@@ -35,25 +35,26 @@ export class UserHome extends React.Component {
                     <TeamMotto motto='Your team motto!' />
                 </header>
                 <main>
-                    <h3>Team {this.props.teamName} Whereabouts:</h3>
+                    
                     <div className="user-whereabouts-container">
+                        <h3>Team {this.props.teamName} Whereabouts:</h3>
                         <ul className="user-whereabouts-list">
                             {whereabouts}
                         </ul>
                     </div>
                     
                     <div className="bulletin-container">
+                        <h3>Team {this.props.teamName} Bulletins:</h3>
                         <ul className="bulletin-list">
                             {bulletins}
                         </ul>
-                        <button type="button">Pin A New Bulletin</button>
                     </div>
                     
-                    <div className="modal-hidden">
+                    <div className="update">
                         <div className="modal modal-bulletin">
                             <BulletinUpdate />
                         </div>
-                        <div className="modal modal-whereabouts">
+                        <div className="update">
                             <UserWhereaboutsUpdate />
                         </div>
                     </div>
