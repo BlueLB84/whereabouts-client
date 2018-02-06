@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import Nav from './Nav/nav';
 import LandingPage from './Pages/LandingPage/landing-page';
+import UserLandingPage from './Pages/UserLandingPage/user-landing-page';
 import UserHome from './Pages/UserHome/user-home-page';
 import SignupForm from './Forms/SignupForm/signup-form';
 import Footer from './Footer/footer';
@@ -19,7 +20,8 @@ export default function Whereabouts() {
                     <main>
                         <Switch>
                             <Route exact path='/' component={LandingPage} />
-                            <Route exact path='/user' component={UserHome} />
+                            <Route exact path='/' component={UserLandingPage} />
+                            <Route exact path='/user-home' component={UserHome} />
                             <Route exact path='/signup' component={SignupForm} />
                         </Switch>
                     </main>
