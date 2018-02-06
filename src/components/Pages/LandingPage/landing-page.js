@@ -8,7 +8,6 @@ export default function LandingPage(props) {
     return (
         <div className="landing-page">
             <header role="banner">
-                <TitleCard title='Whereabouts' />
                 <SubtitleCard />
             </header>
             <section>

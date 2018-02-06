@@ -8,7 +8,6 @@ export default function SignupForm() {
     return (
         <div>
         	<header role="banner">
-            	<TitleCard title='Whereabouts' />
             	<SubtitleCard />
             </header>
 	        <section className="signup-form">
