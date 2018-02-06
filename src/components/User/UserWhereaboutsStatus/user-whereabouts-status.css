@@ -1,0 +1,9 @@
+.user-whereabouts-status {
+	width: 100%;
+}
+
+.user-whereabouts-status li {
+	display: inline-block;
+	width: 25%;
+	padding-top: 10px;
+}
