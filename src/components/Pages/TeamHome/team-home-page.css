@@ -1,7 +1,12 @@
 
-.user-home-page {
+.team-home-page {
 	text-align: center;
-	padding-bottom: 100px;
+	padding-bottom: 75px;
+	margin-top: 25px;
+}
+
+.team-whereabouts-container {
+	margin-top: 20px;
 }
 
 .user-whereabouts, .user-whereabouts-list {

@@ -11,7 +11,7 @@ export class UserLandingPage extends React.Component {
     
     handleTeamClick(index) {
         console.log(`index is: ${index}`);
-        this.props.history.push(`/team/team-${index}`);
+        this.props.history.push(`/team/${index}`);
     }
 
     render() {
