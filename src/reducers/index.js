@@ -22,30 +22,6 @@ const initialState = {
         }
     ],
 
-    whereabouts: [
-        {
-            location: "A secret location",
-            activity: "A secret project"
-        },{
-            location: "Room 22",
-            activity: "Weekly design meeting",
-        },
-        {
-            location: "Austin, TX",
-            activity: "React Hackathon",
-        },{
-            location: "San Francisco, CA",
-            activity: "Attending LWT Summit"
-        },{
-            location: "Desk - Cubby A3",
-            activity: "Working on HTML wireframes",
-        },
-        {
-            location: "Desk - Cubby A7",
-            activity: "Prepping for afternoon dept standup",
-        }
-    ],
-
     users: [
         {
             userId: 0,
@@ -104,11 +80,14 @@ const initialState = {
 
 export const whereaboutsReducer = (state=initialState, action) => {
     if (action.type === actions.ADD_BULLETIN) {
-    	return Object.assign({}, state, {
-    		bulletins: [...state.bulletins, {
-    			text: action.text
-    		}]
-    	})
+        return {
+            ...state, 
+            bulletins: [...state.bulletins, {
+                team: action.team,
+                user: 0,
+                text: action.text
+            }]
+        }
     } else if (action.type === actions.ADD_WHEREABOUTS) {
         return Object.assign({}, state, {
             whereabouts: [...state.whereabouts, {

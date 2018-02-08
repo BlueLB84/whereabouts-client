@@ -1,34 +1,39 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
+import {addBulletin} from '../../../actions';
 
 import './bulletin-form.css';
 
-export default class BulletinForm extends React.Component {
-	constructor(props) {
-		super(props);
-		this.onSubmit = this.onSubmit.bind(this);
-	}
-
-	onSubmit(event) {
+export class BulletinForm extends React.Component {
+	
+	onSubmit = event => {
 		event.preventDefault();
 		const text = this.textInput.value.trim();
-		if (text && this.props.addBulletin) {
-			this.props.addBulletin(this.textInput.value);
+		if (text && this.props.team !== undefined) {
+			this.addBulletin(this.textInput.value, this.props.team);
 		}
 		this.textInput.value = '';
 	}
-
+	
+	addBulletin(text, team) {
+		console.log('action dispatched');
+		this.props.dispatch(addBulletin(text, team));
+	}
 
 	render() {
 		
 		return (
 	        <form className="bulletin-form" onSubmit={this.onSubmit}>
 	            
-				<label for="update-bulletin">Bulletin</label>
+				<label htmlFor="update-bulletin">Bulletin</label>
 				<input placeholder="Your bulletin message" type="text" ref={input => this.textInput = input} />
 	            
 	            <button>Pin It!</button>
-	            <button type="button">Cancel</button>
+	            <button type="reset">Cancel</button>
 	        </form>
     	);
 	} 
 }
+
+export default connect()(BulletinForm);

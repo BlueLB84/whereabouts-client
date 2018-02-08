@@ -1,27 +1,25 @@
 import React from 'react';
-import {connect} from 'react-redux';
+// import {connect} from 'react-redux';
 
 import BulletinForm from '../../Forms/BulletinForm/bulletin-form';
 
-import {addBulletin} from '../../../actions';
-
 import './bulletin-update.css';
 
-export class BulletinUpdate extends React.Component {
-	addBulletin(text) {
-		this.props.dispatch(addBulletin(text, this.props.bulletinIndex));
-	}
+export default function BulletinUpdate(props) {
+		
+	const teamId = props.teamId;
 
-	render() {
-		return (
-	        <div className="bulletin-update">
-	        	<header>
-		            <h3>Pin A New Bulletin</h3>
-	            </header>
-	            <BulletinForm addBulletin={text => this.addBulletin(text)}/>
-	        </div>
-		);
-	}
+	return (
+        <div className="bulletin-update">
+        	<header>
+	            <h3>Pin A New Bulletin</h3>
+            </header>
+            <BulletinForm team={teamId} />
+        </div>
+	);
+	
 };
 
-export default connect()(BulletinUpdate);
+BulletinUpdate.defaultProps = {
+	team: ''
+};

@@ -25,10 +25,10 @@ export default class UserWhereaboutsForm extends React.Component {
 		return (
 	        <form className='user-whereabouts-update-form' onSubmit={this.onSubmit}>
 	            
-	        	<label for="user-location">Location</label>
+	        	<label htmlFor="user-location">Location</label>
 	            <input placeholder='Your new location' type="text" ref={input => this.locationInput = input} />
 
-				<label for="user-activity">Activity</label>
+				<label htmlFor="user-activity">Activity</label>
 	            <input placeholder='Your new activity' type="text" ref={input => this.activityInput = input} />
 	            
 	            <button>Update Your Whereabouts</button>

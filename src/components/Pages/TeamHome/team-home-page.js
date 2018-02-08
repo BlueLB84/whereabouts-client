@@ -19,12 +19,9 @@ import './team-home-page.css';
 export class TeamHome extends React.Component {
 
     render() {
-        const teamId = parseInt(this.props.match.params.teamId);
-        const teamUsers = this.props.users.filter(user => user.teams.includes(teamId));   
-
-        const teamWhereaboutsIndex = teamUsers.map(user => user.whereabouts);
-
-        console.log(teamUsers);
+        const teamId = parseInt(this.props.match.params.teamId, 10);
+        
+        const teamUsers = this.props.users.filter(user => user.teams.includes(teamId));
     
         const whereabouts = teamUsers.map((whereabout, index) => (
 
@@ -34,7 +31,9 @@ export class TeamHome extends React.Component {
 
         ));
 
-        const bulletins = this.props.bulletins.map((bulletin, index) => (
+        const teamBulletins = this.props.bulletins.filter(bulletin => bulletin.team === teamId);
+
+        const bulletins = teamBulletins.map((bulletin, index) => (
             <li className="bulletin-post" key={index}>
                 <BulletinPost {...bulletin} />
             </li>
@@ -64,7 +63,7 @@ export class TeamHome extends React.Component {
                     
                     <div className="update">
                         <div className="modal modal-bulletin">
-                            <BulletinUpdate />
+                            <BulletinUpdate teamId={teamId} />
                         </div>
                         <div className="update">
                             <UserWhereaboutsUpdate />
