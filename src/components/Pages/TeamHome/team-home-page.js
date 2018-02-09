@@ -19,19 +19,28 @@ import './team-home-page.css';
 export class TeamHome extends React.Component {
 
     render() {
-        const teamId = parseInt(this.props.match.params.teamId, 10);
+        const teamIdParam = parseInt(this.props.match.params.teamId, 10);
         
-        const teamUsers = this.props.users.filter(user => user.teams.includes(teamId));
+        const teamUsers = this.props.teams.filter(team => team.teamId === teamIdParam)[0].users;
+
+        const teamWhereabouts = this.props.users.map(user => {
+            const userIdInt = parseInt(user.userId, 10);
+            const userWhereabouts = [];
+
+            if (teamUsers.includes(userIdInt)) {
+                userWhereabouts.push(user.whereabouts);
+            }
+            
+            return userWhereabouts;
+        });
     
-        const whereabouts = teamUsers.map((whereabout, index) => (
-
+        const whereabouts = teamWhereabouts.filter(item => item.length > 0).map((whereabout, index) => (
             <li className="user-whereabouts" key={index}>
-                <UserWhereabouts {...whereabout} />
+                <UserWhereabouts {...whereabout[0]} />
             </li>
-
         ));
 
-        const teamBulletins = this.props.bulletins.filter(bulletin => bulletin.team === teamId);
+        const teamBulletins = this.props.bulletins.filter(bulletin => bulletin.team === teamIdParam);
 
         const bulletins = teamBulletins.map((bulletin, index) => (
             <li className="bulletin-post" key={index}>
@@ -42,8 +51,8 @@ export class TeamHome extends React.Component {
         return (
             <div className="team-home-page">
                 <header role="banner">
-                    <TitleCard title={this.props.teams[teamId].name} />
-                    <TeamMotto motto={this.props.teams[teamId].motto} />
+                    <TitleCard title={this.props.teams[teamIdParam].name} />
+                    <TeamMotto motto={this.props.teams[teamIdParam].motto} />
                 </header>
                 <main>
                     
@@ -63,7 +72,7 @@ export class TeamHome extends React.Component {
                     
                     <div className="update">
                         <div className="modal modal-bulletin">
-                            <BulletinUpdate teamId={teamId} />
+                            <BulletinUpdate teamId={teamIdParam} />
                         </div>
                         <div className="update">
                             <UserWhereaboutsUpdate />
