@@ -11,6 +11,15 @@ img {
 	background-color: #bbb;
 }
 
-img:hover, h4:hover {
+.team-snippet--hover {
+	width: 25%;
+	margin: 0px auto 10px auto;
+	padding: 15px;
+	border: 1px solid rgba(0,0,0, 0.5);
+}
+
+.team-snippet--hover:hover {
 	cursor: pointer;
+	background-color: rgba(0,0,0, 0.5);
+	transform: scale(1.05, 1.05);
 }
