@@ -21,22 +21,21 @@ export class TeamHome extends React.Component {
     render() {
         const teamIdParam = parseInt(this.props.match.params.teamId, 10);
         
-        const teamUsers = this.props.teams.filter(team => team.teamId === teamIdParam)[0].users;
+        const teamUsers = this.props.teams.find(team => team.teamId === teamIdParam).users;
 
-        const teamWhereabouts = this.props.users.map(user => {
-            const userIdInt = parseInt(user.userId, 10);
-            const userWhereabouts = [];
+        const teamWhereabouts = this.props.users.reduce((result, user) => {
 
-            if (teamUsers.includes(userIdInt)) {
-                userWhereabouts.push(user.whereabouts);
+            if (teamUsers.includes(user.userId)) {
+                result.push(user);
             }
-            
-            return userWhereabouts;
-        });
+            return result;
+        },[]);
+
+        console.log(teamWhereabouts);
     
-        const whereabouts = teamWhereabouts.filter(item => item.length > 0).map((whereabout, index) => (
+        const whereabouts = teamWhereabouts.map((whereabout, index) => (
             <li className="user-whereabouts" key={index}>
-                <UserWhereabouts {...whereabout[0]} />
+                <UserWhereabouts {...whereabout} />
             </li>
         ));
 

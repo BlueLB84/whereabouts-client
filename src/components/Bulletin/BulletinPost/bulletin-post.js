@@ -7,7 +7,7 @@ export class BulletinPost extends React.Component {
     
     render() {
 
-		const username = this.props.users[this.props.user].usrname;
+		const username = this.props.users[this.props.userId].usrname;
     	
     	return (
 	        <div className="bulletin-post">

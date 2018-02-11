@@ -4,20 +4,20 @@ const initialState = {
 	bulletins: [
         {
             team: 0,
-            user: 0,
+            userId: 0,
             text: "This is an important message from an important person on your team."
     	},
     	{
             team: 1,
-            user: 1,
+            userId: 1,
     		text: "This is another important message from an yet another semi-important person on your team."
     	},{
             team: 0,
-            user: 2,
+            userId: 2,
             text: "Annual bonus will be distributed this Friday."
         },{
             team: 1,
-            user: 3,
+            userId: 3,
             text: "Monthly design team meeting has been moved to March 1st."
         }
     ],
@@ -78,19 +78,24 @@ export const whereaboutsReducer = (state=initialState, action) => {
     if (action.type === actions.ADD_BULLETIN) {
         return {
             ...state, 
-            bulletins: [...state.bulletins, {
-                team: action.team,
-                user: 0,
-                text: action.text
-            }]
+            bulletins: [...state.bulletins, action.bulletin]
         }
     } else if (action.type === actions.ADD_WHEREABOUTS) {
-        return Object.assign({}, state, {
-            whereabouts: [...state.whereabouts, {
-                location: action.location,
-                activity: action.activity
-            }]
+
+        const updatedUsers = state.users.map((user, index) => {
+            if(index !== action.userId) {
+                return user;
+            }   
+            return {
+                ...user,
+                ...action.user
+            }
         })
+        return {...state, users : updatedUsers};
     }
+    
     return state;
 };
+
+
+
