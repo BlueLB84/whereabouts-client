@@ -32,7 +32,7 @@ export default class UserWhereaboutsForm extends React.Component {
 	            <input placeholder='Your new activity' type="text" ref={input => this.activityInput = input} />
 	            
 	            <button>Update Your Whereabouts</button>
-	            <button type='button'>Cancel</button>
+	            <button type='reset'>Cancel</button>
 	        </form>
     	);
 	} 
