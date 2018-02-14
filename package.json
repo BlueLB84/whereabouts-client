@@ -10,9 +10,12 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.0.1",
     "eslint-plugin-react": "^7.1.0",
+    "firebaseui": "^2.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-firebaseui": "^1.1.8",
     "react-redux": "^5.0.6",
+    "react-redux-firebase": "^2.0.4",
     "react-router-dom": "^4.2.2",
     "react-scripts": "^1.1.0",
     "redux": "^3.7.2"
