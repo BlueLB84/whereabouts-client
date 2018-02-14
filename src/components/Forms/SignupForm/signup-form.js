@@ -1,54 +1,79 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+
 import SubtitleCard from '../../Headers/SubtitleCard/subtitle-card';
+
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import firebase, { auth } from '../../../firebase';
+
 import './signup-form.css';
 
-export default function SignupForm() {
-    return (
-        <div>
-        	<header role="banner">
+export default class SignupForm extends React.Component {
+	constructor() {
+	    super();
+	    this.state = {
+	    user: null
+	    }
+	}
+
+	addUserFirebase = (currentUser) => {
+		const userRef = firebase.database().ref('users');
+		const user = {
+			uid: currentUser.uid,
+			email: currentUser.email,
+			displayName: currentUser.displayName
+		}
+		const userKey = userRef.push(user).key;
+		console.log(userKey);
+	}
+
+	uiConfig = {
+		signInFlow: 'popup',
+		signInOptions: [
+		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+		firebase.auth.GithubAuthProvider.PROVIDER_ID
+		],
+		callbacks: {
+			signInSuccess: () => false
+		}
+	};
+
+	componentWillMount() {
+		auth.onAuthStateChanged((user) => {
+			if (user) {
+				this.setState({ user });
+				this.addUserFirebase(this.state.user)
+			} 
+		});
+	}		
+
+
+
+   render() {
+
+		if (!this.state.user) {
+			return (
+	        <div>
+	        	<header role="banner">
+	            	<SubtitleCard />
+	            </header>
+		        <section className="signup-form">
+			        <h3>Sign In to Whereabouts!</h3>
+			        <p>Not on Whereabouts yet? Sign In with Google or GitHub credentials and we'll get you started:</p>
+			        <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
+		      	</section>
+	        </div>
+    	);
+		}
+		return (
+			<div>
+				<header role="banner">
             	<SubtitleCard />
-            </header>
-	        <section className="signup-form">
-		        <p className="disclaimer">NOTE: This signup form is not functional and will be replaced by Firebase Auth UI</p>
-		        <header>
-		        	<h3>Join Whereabouts!</h3>
-		        </header>
-		        <div>
-			        <p>Start a new Whereabouts team! <br></br>
-			        <em>or</em><br></br>
-			        Enter the name of an existing team that you want to join!</p>
-			        <form className='signup-form'>
-			            <div>
-			            	<label for="team-name">Team name</label>
-			            	<input placeholder='Team Name' type="text" name='team-name' id='team-name' />
-			            </div>
-			            <div>
-			            	<label for="first-name">First name</label>
-			            	<input placeholder='First Name' type="text" name='first-name' id='first-name' />
-			            </div>
-			            <div>
-			            	<label for="last-name">Last name</label>
-			            	<input type="text" name="last-name" id='last-name' placeholder='Last Name' />
-			            </div>
-			            <div>
-			            	<label for="email">Email</label>
-			            	<input placeholder="youremail@email.com" type="email" name='email' id='email' />
-			            </div>
-			            <div>
-			            	<label for="username">Username</label>
-			            	<input placeholder="username" type="text" name='username' id='username' />
-			            </div>
-			            <div>
-			            	<label for="password">Password</label>
-			            	<input placeholder="password" type="password" name='password' id='password' />
-			            </div>
-			            <button type='submit'>Sign Up</button>
-			            <button type='reset'>Cancel</button>
-			        </form>
-			    </div>
-	      	</section>
-	      	<Link to='/'>Whereabouts Home</Link>
-        </div>
-    );
+	        </header>
+	        <section>
+	        	<p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
+	        	<p onClick={() => {firebase.auth().signOut(); this.setState({ user: null });}}>Sign-out</p>
+	        </section>
+			</div>
+		)
+	}
 };

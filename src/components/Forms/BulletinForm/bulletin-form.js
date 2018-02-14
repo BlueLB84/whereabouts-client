@@ -1,4 +1,5 @@
 import React from 'react';
+import firebase from '../../../firebase';
 import {connect} from 'react-redux';
 
 import {addBulletin} from '../../../actions';
@@ -12,13 +13,23 @@ export class BulletinForm extends React.Component {
 		const text = this.textInput.value.trim();
 		if (text && this.props.team !== undefined) {
 			this.addBulletin(this.textInput.value, this.props.team);
+			this.addBulletinFirebase(this.textInput.value, this.props.team);
 		}
+
 		this.textInput.value = '';
 	}
 	
 	addBulletin(text, team) {
-		console.log('action dispatched');
 		this.props.dispatch(addBulletin(text, team));
+	}
+
+	addBulletinFirebase(text, team) {
+		const bulletinsRef = firebase.database().ref('bulletins');
+		const bulletin = {
+			text,
+			team
+		}
+		bulletinsRef.push(bulletin);
 	}
 
 	render() {

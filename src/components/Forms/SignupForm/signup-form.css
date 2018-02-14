@@ -1,20 +1,22 @@
 .signup-form {
 	text-align: center;
-}
-
-form > div {
-	margin-bottom: 10px;
-}
-
-label {
-	margin-right: 5px;
+	width: 100%;
 }
 
 p {
 	padding-bottom: 15px;
 }
 
-.disclaimer {
-	color: red;
-	font-weight: bold;
+.firebaseui-idp-list {
+	width: 100%;
 }
+
+.firebaseui-idp-list > .firebaseui-list-item {
+    margin-bottom: 15px;
+    display: block;
+    width: 100%;
+}
+
+
+
+

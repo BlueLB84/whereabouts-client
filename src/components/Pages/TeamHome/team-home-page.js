@@ -30,8 +30,6 @@ export class TeamHome extends React.Component {
             }
             return result;
         },[]);
-
-        console.log(teamWhereabouts);
     
         const whereabouts = teamWhereabouts.map((whereabout, index) => (
             <li className="user-whereabouts" key={index}>

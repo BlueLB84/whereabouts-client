@@ -18,7 +18,7 @@ export default function Whereabouts() {
     return (
         <Router>
             <div className='whereabouts'>
-                <Nav login='Login' signup='Signup' />
+                <Nav />
                 <header>
                     <Link to='/'><TitleCard title='Whereabouts' /></Link>
                 </header>
@@ -27,10 +27,10 @@ export default function Whereabouts() {
                             <Route exact path='/' component={LandingPage} />
                             <Route exact path='/user/:userId' component={UserLandingPage} />
                             <Route exact path='/team/:teamId' component={TeamHome} />
-                            <Route exact path='/signup' component={SignupForm} />
+                            <Route exact path='/signin-signup' component={SignupForm} />
                         </Switch>
                     </main>
-                <Footer login='Login' signup='Signup' />
+                <Footer />
             </div>
         </Router>
     );

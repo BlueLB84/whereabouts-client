@@ -2,10 +2,29 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
+// import firebase from '../../../firebase';
+
 import TitleCard from '../../Headers/TitleCard/title-card';
 import TeamSnippet from '../../Team/TeamSnippet/team-snippet';
 
 import './user-landing-page.css';
+
+// firebase.auth().onAuthStateChanged(function(user) {
+//   if (user) {
+//     // User is signed in.
+//     var displayName = user.displayName;
+//     var email = user.email;
+//     var emailVerified = user.emailVerified;
+//     var photoURL = user.photoURL;
+//     var isAnonymous = user.isAnonymous;
+//     var uid = user.uid;
+//     var providerData = user.providerData;
+//     // ...
+//   } else {
+//     // User is signed out.
+//     // ...
+//   }
+// });
 
 export class UserLandingPage extends React.Component {
     

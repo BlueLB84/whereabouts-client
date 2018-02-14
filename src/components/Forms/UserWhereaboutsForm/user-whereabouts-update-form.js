@@ -1,10 +1,13 @@
 import React from 'react';
-
+import firebase from '../../../firebase';
 import './user-whereabouts-update-form.css';
 
 export default class UserWhereaboutsForm extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			whereabouts: []
+		}
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 
@@ -14,11 +17,40 @@ export default class UserWhereaboutsForm extends React.Component {
 		const activity = this.activityInput.value.trim();
 		if (location && activity && this.props.addWhereabouts) {
 			this.props.addWhereabouts(this.locationInput.value, this.activityInput.value);
+			this.addWhereaboutsFirebase(this.locationInput.value, this.activityInput.value);
 		}
 		this.locationInput.value = '';
 		this.activityInput.value = '';
 	}
 
+	addWhereaboutsFirebase(location, activity) {
+		const whereaboutsRef = firebase.database().ref('whereabouts');
+		const whereabout = {
+			location,
+			activity,
+			userId: 0
+		}
+		whereaboutsRef.push(whereabout);
+	}
+
+	componentDidMount() {
+		const whereaboutsRef = firebase.database().ref('whereabouts');
+		whereaboutsRef.on('value', (snapshot) => {
+			let whereabouts = snapshot.val();
+			let newState = [];
+			for (let whereabout in whereabouts) {
+				newState.push({
+					location: whereabouts[whereabout].location,
+					activity: whereabouts[whereabout].activity,
+					userId: whereabouts[whereabout].userId
+				});
+			}
+			this.setState({
+				whereabouts: newState
+			});
+			console.log(this.state.whereabouts);
+		});
+	}
 
 	render() {
 		
