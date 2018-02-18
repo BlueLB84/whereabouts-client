@@ -29,7 +29,6 @@ import './user-landing-page.css';
 export class UserLandingPage extends React.Component {
 
     handleTeamClick(index) {
-        console.log(`index is: ${index}`);
         this.props.history.push(`/team/${index}`);
     }
 
@@ -37,19 +36,19 @@ export class UserLandingPage extends React.Component {
         const teamIds = [];
         const currentUserTeams = [];
         
-        for (const prop in this.props.teams.teams) {
+        for (const prop in this.props.teams) {
             teamIds.push(prop);
         }
 
         teamIds.map((id, index) => {
             let userIds = [];
-            const teamUsers = this.props.teams.teams[id].users;
+            const teamUsers = this.props.teams[id].users;
             Object.keys(teamUsers).forEach(key => {
                 userIds.push(teamUsers[key].userId);    
             });
 
             if (userIds.includes(parseInt(this.props.match.params.userId, 10))) {
-                currentUserTeams.push(this.props.teams.teams[id]);
+                currentUserTeams.push(this.props.teams[id]);
             }
         });
 
@@ -59,7 +58,7 @@ export class UserLandingPage extends React.Component {
             </li>
         ));
 
-        const userWelcome = `Welcome ${this.props.teams.users[this.props.match.params.userId].usrname}`;
+        const userWelcome = `Welcome ${this.props.users[this.props.match.params.userId].usrname}`;
     
         return (
             <div className="user-landing-page">
@@ -80,9 +79,10 @@ export class UserLandingPage extends React.Component {
     }
 };
 
-const mapStateToProps = (state) => {
-    return {teams: state.teams};
-};
+const mapStateToProps = (state, props) => ({
+    teams: state.teams.teams,
+    users: state.users.users
+});
 
 export default connect(mapStateToProps)(UserLandingPage);
 

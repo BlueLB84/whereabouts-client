@@ -19,6 +19,9 @@ import './team-home-page.css';
 export class TeamHome extends React.Component {
 
     render() {
+        console.log(this.props.teams);
+        console.log(this.props.users);
+
         const teamIdParam = parseInt(this.props.match.params.teamId, 10);
         
         const teamUsers = this.props.teams.find(team => team.teamId === teamIdParam).users;
@@ -83,9 +86,9 @@ export class TeamHome extends React.Component {
     }
 };
 
-const mapStateToProps = state => ({
-    teams: state.teams,
-    users: state.users
+const mapStateToProps = (state, props) => ({
+    teams: state.teams.teams,
+    users: state.users.users
 });
 
 export default connect(mapStateToProps)(TeamHome);
