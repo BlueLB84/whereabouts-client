@@ -27,23 +27,44 @@ import './user-landing-page.css';
 // });
 
 export class UserLandingPage extends React.Component {
-    
+
     handleTeamClick(index) {
         console.log(`index is: ${index}`);
         this.props.history.push(`/team/${index}`);
     }
 
     render() {
-        const teams = this.props.teams.map((team, index) => (
+        const teamIds = [];
+        const currentUserTeams = [];
+        
+        for (const prop in this.props.teams.teams) {
+            teamIds.push(prop);
+        }
+
+        teamIds.map((id, index) => {
+            let userIds = [];
+            const teamUsers = this.props.teams.teams[id].users;
+            Object.keys(teamUsers).forEach(key => {
+                userIds.push(teamUsers[key].userId);    
+            });
+
+            if (userIds.includes(parseInt(this.props.match.params.userId, 10))) {
+                currentUserTeams.push(this.props.teams.teams[id]);
+            }
+        });
+
+        const teams = currentUserTeams.map((team, index) => (
             <li className="user-team" key={index}>
                 <TeamSnippet {...team} index={index} teamId={index} onClick={this.handleTeamClick.bind(this, index)} />
             </li>
         ));
+
+        const userWelcome = `Welcome ${this.props.teams.users[this.props.match.params.userId].usrname}`;
     
         return (
             <div className="user-landing-page">
                 <header role="banner">
-                    <TitleCard title='Welcome Username' />
+                    <TitleCard title={userWelcome} />
                 </header>
                 <main>
                     <h3>Your Whereabouts Teams:</h3>
@@ -59,8 +80,12 @@ export class UserLandingPage extends React.Component {
     }
 };
 
-const mapStateToProps = state => ({
-    teams: state.teams
-});
+const mapStateToProps = (state) => {
+    return {teams: state.teams};
+};
 
 export default connect(mapStateToProps)(UserLandingPage);
+
+
+
+

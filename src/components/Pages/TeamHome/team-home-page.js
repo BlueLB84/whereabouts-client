@@ -84,7 +84,6 @@ export class TeamHome extends React.Component {
 };
 
 const mapStateToProps = state => ({
-    bulletins: state.bulletins,
     teams: state.teams,
     users: state.users
 });

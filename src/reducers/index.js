@@ -62,7 +62,7 @@ const initialState = {
                 2: {userId: 2}
             }
         },
-        1: {
+        21: {
             name: "Team Chief",
             motto: "Keep your eye on the pie!",
             imgSrc: "https://instagram.fbed1-1.fna.fbcdn.net/vp/d4316384417239f8254d46c7519f2ffe/5B0D3303/t51.2885-15/sh0.08/e35/p640x640/26153198_133299754137879_6013809235014451200_n.jpg",
@@ -83,6 +83,27 @@ const initialState = {
                 1: {userId: 3},
                 2: {userId: 4},
                 3: {userId: 5}
+            }
+        },
+        15: {
+            name: "Team BV",
+            motto: "Getting it done!",
+            imgSrc: "https://instagram.fbed1-1.fna.fbcdn.net/vp/b9ccb2404867881060a1212f572cee8d/5B159285/t51.2885-15/s640x640/sh0.08/e35/27877811_1318188988326985_6472819029957410816_n.jpg",
+            bulletins: {
+                0: {
+                    userId: 4,
+                    text: "This is another important message from an yet another semi-important person on your team."
+                    // dateTime: Date();
+                },
+                1: {
+                    userId: 5,
+                    text: "Monthly design team meeting has been moved to March 1st."
+                    // dateTime: Date();
+                }
+            },
+            users: {
+                0: {userId: 4},
+                1: {userId: 5},
             }
         }
     }
