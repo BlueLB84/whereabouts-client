@@ -54,10 +54,11 @@ export class UserLandingPage extends React.Component {
 
         const teams = currentUserTeams.map((team, index) => (
             <li className="user-team" key={index}>
-                <TeamSnippet {...team} index={index} teamId={index} onClick={this.handleTeamClick.bind(this, index)} />
+                <TeamSnippet {...team} index={index} teamId={parseInt(teamIds[index], 10)} onClick={this.handleTeamClick.bind(this, (parseInt(teamIds[index], 10)))} />
             </li>
         ));
 
+        console.log(this.props);
         const userWelcome = `Welcome ${this.props.users[this.props.match.params.userId].usrname}`;
     
         return (
@@ -80,8 +81,8 @@ export class UserLandingPage extends React.Component {
 };
 
 const mapStateToProps = (state, props) => ({
-    teams: state.teams.teams,
-    users: state.users.users
+    teams: state.whereabouts.teams,
+    users: state.whereabouts.users
 });
 
 export default connect(mapStateToProps)(UserLandingPage);

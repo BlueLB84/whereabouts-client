@@ -11,10 +11,10 @@ export const addTeam = (name, motto, imgSrc, bulletins, users) => ({
 });
 
 export const ADD_BULLETIN = 'ADD_BULLETIN';
-export const addBulletin = (text, teamId, userId=0) => ({
+export const addBulletin = (text, teamId, userId) => ({
 	type: ADD_BULLETIN,
 	teamId,
-	bulletin: {
+	bulletins: {
 		userId,
 		text
 	}

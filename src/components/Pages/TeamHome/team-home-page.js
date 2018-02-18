@@ -19,28 +19,36 @@ import './team-home-page.css';
 export class TeamHome extends React.Component {
 
     render() {
-        console.log(this.props.teams);
-        console.log(this.props.users);
 
         const teamIdParam = parseInt(this.props.match.params.teamId, 10);
+        const currentTeam = this.props.teams[teamIdParam];
+        const teamUsersProp = this.props.teams[teamIdParam].users;
         
-        const teamUsers = this.props.teams.find(team => team.teamId === teamIdParam).users;
+        const teamUserIds = [];
 
-        const teamWhereabouts = this.props.users.reduce((result, user) => {
+        Object.keys(teamUsersProp).forEach(key => 
+            teamUserIds.push(teamUsersProp[key].userId)
+        );
+        
+        const teamBulletins = [];
 
-            if (teamUsers.includes(user.userId)) {
-                result.push(user);
+        Object.keys(currentTeam.bulletins).forEach(key => {
+            teamBulletins.push(currentTeam.bulletins[key])
+        });
+
+        const teamUsers = [];
+
+        Object.keys(this.props.users).forEach(key => {
+            if (teamUserIds.includes(parseInt(key, 10))) {
+                teamUsers.push(this.props.users[key])
             }
-            return result;
-        },[]);
+        });
     
-        const whereabouts = teamWhereabouts.map((whereabout, index) => (
+        const whereabouts = teamUsers.map((user, index) => (
             <li className="user-whereabouts" key={index}>
-                <UserWhereabouts {...whereabout} />
+                <UserWhereabouts {...user} />
             </li>
         ));
-
-        const teamBulletins = this.props.bulletins.filter(bulletin => bulletin.team === teamIdParam);
 
         const bulletins = teamBulletins.map((bulletin, index) => (
             <li className="bulletin-post" key={index}>
@@ -72,7 +80,7 @@ export class TeamHome extends React.Component {
                     
                     <div className="update">
                         <div className="modal modal-bulletin">
-                            <BulletinUpdate teamId={teamIdParam} />
+                            <BulletinUpdate teamId={teamIdParam} userId={0}/>
                         </div>
                         <div className="update">
                             <UserWhereaboutsUpdate />
@@ -87,8 +95,8 @@ export class TeamHome extends React.Component {
 };
 
 const mapStateToProps = (state, props) => ({
-    teams: state.teams.teams,
-    users: state.users.users
+    teams: state.whereabouts.teams,
+    users: state.whereabouts.users
 });
 
 export default connect(mapStateToProps)(TeamHome);

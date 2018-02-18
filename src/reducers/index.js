@@ -104,28 +104,39 @@ const initialState = {
             users: {
                 0: {userId: 4},
                 1: {userId: 5},
+                2: {userId: 0}
             }
         }
     }
 };
 
-export const teamsReducer = (state=initialState, action) => {
+export const whereaboutsReducer = (state=initialState, action) => {
     if (action.type === actions.ADD_TEAM) {
         return {
             ...state,
             teams: action.teamId
         }
     } else if (action.type === actions.ADD_BULLETIN) {
-        return {
-            ...state, 
-            teams: {...state.teams[action.teamId], ...action.bulletin}
-        }
-    } 
-    return state;
-};
+        const lastBulletinId = Object.keys(state.teams[action.teamId].bulletins).slice(-1)[0];
+        const bulletinId = parseInt(lastBulletinId, 10) + 1;
 
-export const usersReducer = (state=initialState, action) => {
-    if (action.type === actions.ADD_USER) {
+        return {
+            ...state,
+            teams : {
+                ...state.teams,
+                [action.teamId] : {
+                    ...state.teams[action.teamId],
+                    bulletins : {
+                        ...state.teams[action.teamId].bulletins,
+                        [bulletinId] : {
+                            ...state.teams[action.teamId].bulletins[bulletinId],
+                            ...action.bulletins
+                        }
+                    }
+                }
+            }
+        }
+    } else if (action.type === actions.ADD_USER) {
         return {
             ...state,
             users: action.userId
@@ -139,7 +150,6 @@ export const usersReducer = (state=initialState, action) => {
         return {...state.users, ...action.userId}
     } 
     return state;
-}
-
+};
 
 

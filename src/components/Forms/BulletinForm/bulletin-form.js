@@ -1,5 +1,5 @@
 import React from 'react';
-import firebase from '../../../firebase';
+// import firebase from '../../../firebase';
 import {connect} from 'react-redux';
 
 import {addBulletin} from '../../../actions';
@@ -8,32 +8,32 @@ import './bulletin-form.css';
 
 export class BulletinForm extends React.Component {
 	
+
 	onSubmit = event => {
 		event.preventDefault();
 		const text = this.textInput.value.trim();
-		if (text && this.props.team !== undefined) {
-			this.addBulletin(this.textInput.value, this.props.team);
-			this.addBulletinFirebase(this.textInput.value, this.props.team);
+		if (text && this.props.teamId !== undefined && this.props.userId !== undefined) {
+			this.addBulletin(this.textInput.value, this.props.teamId, this.props.userId);
+			// this.addBulletinFirebase(this.textInput.value, this.props.team);
 		}
 
 		this.textInput.value = '';
 	}
 	
-	addBulletin(text, team) {
-		this.props.dispatch(addBulletin(text, team));
+	addBulletin(text, teamId, userId) {
+		this.props.dispatch(addBulletin(text, teamId, userId));
 	}
 
-	addBulletinFirebase(text, team) {
-		const bulletinsRef = firebase.database().ref('bulletins');
-		const bulletin = {
-			text,
-			team
-		}
-		bulletinsRef.push(bulletin);
-	}
+	// addBulletinFirebase(text, team) {
+	// 	const bulletinsRef = firebase.database().ref('bulletins');
+	// 	const bulletin = {
+	// 		text,
+	// 		team
+	// 	}
+	// 	bulletinsRef.push(bulletin);
+	// }
 
 	render() {
-		
 		return (
 	        <form className="bulletin-form" onSubmit={this.onSubmit}>
 	            

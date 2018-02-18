@@ -8,7 +8,7 @@ export default function Nav() {
             <nav>
 		      <ul>
 		        <li><Link to='/signin-signup'>Sign In | Sign Up</Link></li>
-		        <li><Link to='/user/userId'>Demo User Landing Page</Link></li>
+		        <li><Link to='/user/0'>Demo User Landing Page</Link></li>
 		      </ul>  
 		    </nav>
         </div>

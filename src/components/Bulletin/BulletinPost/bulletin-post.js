@@ -6,7 +6,6 @@ import './bulletin-post.css';
 export class BulletinPost extends React.Component {
     
     render() {
-
 		const username = this.props.users[this.props.userId].usrname;
     	
     	return (
@@ -22,9 +21,9 @@ BulletinPost.defaultProps = {
     text: ''
 };
 
-const mapStateToProps = state => ({
-    bulletins: state.bulletins,
-    users: state.users
+const mapStateToProps = (state, props) => ({
+    teams: state.whereabouts.teams,
+    users: state.whereabouts.users
 });
 
 export default connect(mapStateToProps)(BulletinPost);
