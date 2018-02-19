@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import './bulletin-post.css';
 
@@ -22,8 +22,8 @@ BulletinPost.defaultProps = {
 };
 
 const mapStateToProps = (state, props) => ({
-    teams: state.whereabouts.teams,
-    users: state.whereabouts.users
+    teams: state.teams,
+    users: state.users
 });
 
 export default connect(mapStateToProps)(BulletinPost);

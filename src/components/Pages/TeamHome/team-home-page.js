@@ -1,14 +1,10 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
-import {firebaseConnect} from 'react-redux-firebase';
-import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { Link } from 'react-router-dom';
 
 import TitleCard from '../../Headers/TitleCard/title-card';
 import TeamMotto from '../../Team/TeamMotto/team-motto';
-
-// import UserWhereaboutsStatus from './../UserWhereaboutsStatus/user-whereabouts-status';
-// import UserImgUsrname from './../UserImgUsrname/user-img-usrname';
 
 import UserWhereabouts from '../../User/UserWhereabouts/user-whereabouts';
 import UserWhereaboutsUpdate from '../../User/UserWhereaboutsUpdate/user-whereabouts-update';
@@ -23,26 +19,17 @@ export class TeamHome extends React.Component {
     render() {
 
         const teamIdParam = parseInt(this.props.match.params.teamId, 10);
-        const currentTeam = this.props.teams[teamIdParam];
-        const teamUsersProp = this.props.teams[teamIdParam].users;
-        
-        const teamUserIds = [];
-
-        Object.keys(teamUsersProp).forEach(key => 
-            teamUserIds.push(teamUsersProp[key].userId)
-        );
-        
-        const teamBulletins = [];
-
-        Object.keys(currentTeam.bulletins).forEach(key => {
-            teamBulletins.push(currentTeam.bulletins[key])
-        });
+        const currentTeam = this.props.teams.filter(team => {
+            if (team.teamId === teamIdParam) {
+                return team;
+            }
+        })[0];
 
         const teamUsers = [];
 
-        Object.keys(this.props.users).forEach(key => {
-            if (teamUserIds.includes(parseInt(key, 10))) {
-                teamUsers.push(this.props.users[key])
+        this.props.users.map((user, index) => {
+            if (currentTeam.users.includes(user.userId)) {
+                teamUsers.push(user);
             }
         });
     
@@ -52,7 +39,7 @@ export class TeamHome extends React.Component {
             </li>
         ));
 
-        const bulletins = teamBulletins.map((bulletin, index) => (
+        const bulletins = currentTeam.bulletins.map((bulletin, index) => (
             <li className="bulletin-post" key={index}>
                 <BulletinPost {...bulletin} />
             </li>
@@ -61,8 +48,8 @@ export class TeamHome extends React.Component {
         return (
             <div className="team-home-page">
                 <header role="banner">
-                    <TitleCard title={this.props.teams[teamIdParam].name} />
-                    <TeamMotto motto={this.props.teams[teamIdParam].motto} />
+                    <TitleCard title={currentTeam.name} />
+                    <TeamMotto motto={currentTeam.motto} />
                 </header>
                 <main>
                     
@@ -97,8 +84,8 @@ export class TeamHome extends React.Component {
 };
 
 const mapStateToProps = (state, props) => ({
-    teams: state.whereabouts.teams,
-    users: state.whereabouts.users
+    teams: state.teams,
+    users: state.users
 });
 
 export default connect(mapStateToProps)(TeamHome);
