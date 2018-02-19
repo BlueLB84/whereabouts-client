@@ -21,13 +21,12 @@ export const addBulletin = (text, teamId, userId) => ({
 });
 
 export const ADD_WHEREABOUTS = 'ADD_WHEREABOUTS';
-export const addWhereabouts = (location, activity, userId=0) => ({
+export const addWhereabouts = (location, activity, userId) => ({
 	type: ADD_WHEREABOUTS,
-	userId : {
-		whereabouts: {
+	userId,
+	whereabouts: {
 		location,
 		activity
-		}
 	}
 });
 

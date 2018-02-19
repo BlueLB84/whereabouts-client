@@ -8,17 +8,20 @@ import {addWhereabouts} from '../../../actions';
 import './user-whereabouts-update.css';
 
 export class UserWhereaboutsUpdate extends React.Component {
-	addWhereabouts(location, activity) {
-		this.props.dispatch(addWhereabouts(location, activity, this.props.whereaboutsIndex));
+	
+
+	addWhereabouts(location, activity, userId) {
+		this.props.dispatch(addWhereabouts(location, activity, this.props.userId));
 	}
 
 	render() {
+		console.log(this.props);
 		return (
 	        <div className="user-whereabouts-update">
 	        	<header>
 		            <h3>Update Your Whereabouts</h3>
 	            </header>
-	            <UserWhereaboutsForm addWhereabouts={(location, activity) => this.addWhereabouts(location, activity)}/>
+	            <UserWhereaboutsForm addWhereabouts={(location, activity, userId) => this.addWhereabouts(location, activity, userId)} userId={this.props.userId} />
 	        </div>
 		);
 	}

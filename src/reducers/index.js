@@ -147,7 +147,16 @@ export const whereaboutsReducer = (state=initialState, action) => {
             users: {...state.users, ...action.userId}
         }
     } else if (action.type === actions.ADD_WHEREABOUTS) {
-        return {...state.users, ...action.userId}
+        return {
+            ...state,
+            users : {
+                ...state.users,
+                [action.userId] : {
+                    ...state.users[action.userId],
+                   whereabouts : action.whereabouts
+                }
+            }
+        }
     } 
     return state;
 };

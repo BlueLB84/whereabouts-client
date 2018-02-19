@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {firebaseConnect} from 'react-redux-firebase';
 import {Link} from 'react-router-dom';
 
 import TitleCard from '../../Headers/TitleCard/title-card';
@@ -80,10 +82,10 @@ export class TeamHome extends React.Component {
                     
                     <div className="update">
                         <div className="modal modal-bulletin">
-                            <BulletinUpdate teamId={teamIdParam} userId={0}/>
+                            <BulletinUpdate teamId={teamIdParam} userId={0} />
                         </div>
                         <div className="update">
-                            <UserWhereaboutsUpdate />
+                            <UserWhereaboutsUpdate userId={0} />
                         </div>
                     </div>
                 
