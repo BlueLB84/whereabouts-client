@@ -2,29 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-// import firebase from '../../../firebase';
-
 import TitleCard from '../../Headers/TitleCard/title-card';
 import TeamSnippet from '../../Team/TeamSnippet/team-snippet';
 
 import './user-landing-page.css';
-
-// firebase.auth().onAuthStateChanged(function(user) {
-//   if (user) {
-//     // User is signed in.
-//     var displayName = user.displayName;
-//     var email = user.email;
-//     var emailVerified = user.emailVerified;
-//     var photoURL = user.photoURL;
-//     var isAnonymous = user.isAnonymous;
-//     var uid = user.uid;
-//     var providerData = user.providerData;
-//     // ...
-//   } else {
-//     // User is signed out.
-//     // ...
-//   }
-// });
 
 export class UserLandingPage extends React.Component {
 
@@ -33,33 +14,31 @@ export class UserLandingPage extends React.Component {
     }
 
     render() {
-        const teamIds = [];
+        const userIdParam = parseInt(this.props.match.params.userId, 10);
+
+        const currentUser = this.props.users.filter(user => 
+            user.userId === userIdParam
+        )[0];
+
+        console.log(currentUser);
+
         const currentUserTeams = [];
         
-        for (const prop in this.props.teams) {
-            teamIds.push(prop);
-        }
-
-        teamIds.map((id, index) => {
-            let userIds = [];
-            const teamUsers = this.props.teams[id].users;
-            Object.keys(teamUsers).forEach(key => {
-                userIds.push(teamUsers[key].userId);    
-            });
-
-            if (userIds.includes(parseInt(this.props.match.params.userId, 10))) {
-                currentUserTeams.push(this.props.teams[id]);
+        this.props.teams.map((team, index) => {
+            if (team.users.includes(userIdParam)) {
+                currentUserTeams.push(team);
             }
         });
 
+        console.log(currentUserTeams);
+
         const teams = currentUserTeams.map((team, index) => (
             <li className="user-team" key={index}>
-                <TeamSnippet {...team} index={index} teamId={parseInt(teamIds[index], 10)} onClick={this.handleTeamClick.bind(this, (parseInt(teamIds[index], 10)))} />
+                <TeamSnippet {...team} index={index} teamId={team.teamId} onClick={this.handleTeamClick.bind(this, team.teamId)} />
             </li>
         ));
 
-        console.log(this.props);
-        const userWelcome = `Welcome ${this.props.users[this.props.match.params.userId].usrname}`;
+        const userWelcome = `Welcome ${currentUser.usrname}`;
     
         return (
             <div className="user-landing-page">
@@ -81,8 +60,8 @@ export class UserLandingPage extends React.Component {
 };
 
 const mapStateToProps = (state, props) => ({
-    teams: state.whereabouts.teams,
-    users: state.whereabouts.users
+    teams: state.teams,
+    users: state.users
 });
 
 export default connect(mapStateToProps)(UserLandingPage);
