@@ -20,8 +20,6 @@ export class UserLandingPage extends React.Component {
             user.userId === userIdParam
         )[0];
 
-        console.log(currentUser);
-
         const currentUserTeams = [];
         
         this.props.teams.map((team, index) => {
@@ -29,8 +27,6 @@ export class UserLandingPage extends React.Component {
                 currentUserTeams.push(team);
             }
         });
-
-        console.log(currentUserTeams);
 
         const teams = currentUserTeams.map((team, index) => (
             <li className="user-team" key={index}>
