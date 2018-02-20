@@ -138,15 +138,16 @@ export const whereaboutsReducer = (state=initialState, action) => {
             users: {...state.users, ...action.userId}
         }
     } else if (action.type === actions.ADD_WHEREABOUTS) {
+        let userIndex;
+        state.users.map((user, index) => {
+            if (user.userId === action.userId) {
+                userIndex = index;
+            }
+        });
+
         return {
             ...state,
-            users : {
-                ...state.users,
-                [action.userId] : {
-                    ...state.users[action.userId],
-                   whereabouts : action.whereabouts
-                }
-            }
+            users: state.users.map((user, index) => index === userIndex ? {...user, whereabouts: {...action.whereabouts}} : user)
         }
     } 
     return state;
