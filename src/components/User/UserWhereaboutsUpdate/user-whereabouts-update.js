@@ -1,9 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import UserWhereaboutsForm from '../../Forms/UserWhereaboutsForm/user-whereabouts-update-form';
 
-import {addWhereabouts} from '../../../actions';
+import { addWhereabouts } from '../../../actions';
 
 import './user-whereabouts-update.css';
 
@@ -15,7 +15,6 @@ export class UserWhereaboutsUpdate extends React.Component {
 	}
 
 	render() {
-		console.log(this.props);
 		return (
 	        <div className="user-whereabouts-update">
 	        	<header>
