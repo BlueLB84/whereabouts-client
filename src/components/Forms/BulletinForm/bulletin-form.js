@@ -1,8 +1,8 @@
 import React from 'react';
-// import firebase from '../../../firebase';
-import {connect} from 'react-redux';
 
-import {addBulletin} from '../../../actions';
+import { connect } from 'react-redux';
+
+import { addBulletin } from '../../../actions';
 
 import './bulletin-form.css';
 
@@ -23,15 +23,6 @@ export class BulletinForm extends React.Component {
 	addBulletin(text, teamId, userId) {
 		this.props.dispatch(addBulletin(text, teamId, userId));
 	}
-
-	// addBulletinFirebase(text, team) {
-	// 	const bulletinsRef = firebase.database().ref('bulletins');
-	// 	const bulletin = {
-	// 		text,
-	// 		team
-	// 	}
-	// 	bulletinsRef.push(bulletin);
-	// }
 
 	render() {
 		return (

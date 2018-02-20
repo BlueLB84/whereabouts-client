@@ -17,7 +17,6 @@ import './team-home-page.css';
 export class TeamHome extends React.Component {
 
     render() {
-
         const teamIdParam = parseInt(this.props.match.params.teamId, 10);
         const currentTeam = this.props.teams.filter(team => {
             if (team.teamId === teamIdParam) {

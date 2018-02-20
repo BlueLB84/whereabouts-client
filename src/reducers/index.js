@@ -113,24 +113,19 @@ export const whereaboutsReducer = (state=initialState, action) => {
             teams: action.teamId
         }
     } else if (action.type === actions.ADD_BULLETIN) {
-        const lastBulletinId = Object.keys(state.teams[action.teamId].bulletins).slice(-1)[0];
-        const bulletinId = parseInt(lastBulletinId, 10) + 1;
+        let teamIndex;
+
+        state.teams.map((team, index) => {
+            if (team.teamId === action.teamId) {
+                teamIndex = index;
+            }
+        });
+
+        const newBulletinsArr = [...state.teams[teamIndex].bulletins, action.bulletins];
 
         return {
             ...state,
-            teams : {
-                ...state.teams,
-                [action.teamId] : {
-                    ...state.teams[action.teamId],
-                    bulletins : {
-                        ...state.teams[action.teamId].bulletins,
-                        [bulletinId] : {
-                            ...state.teams[action.teamId].bulletins[bulletinId],
-                            ...action.bulletins
-                        }
-                    }
-                }
-            }
+            teams: state.teams.map((team, index) => index === teamIndex ? {...team, bulletins: newBulletinsArr} : team)
         }
     } else if (action.type === actions.ADD_USER) {
         return {
