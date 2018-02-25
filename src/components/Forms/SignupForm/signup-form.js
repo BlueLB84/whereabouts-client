@@ -23,7 +23,13 @@ export default class SignupForm extends React.Component {
 			displayName: currentUser.displayName
 		}
 		const userKey = userRef.push(user).key;
-		console.log(userKey);
+		console.log(currentUser);
+		console.log(currentUser.uid);
+		auth.currentUser.getIdToken(true).then(function(idToken) {
+			console.log(idToken);
+			// Send token to your backend via HTTPS
+			// ...
+		});
 	}
 
 	uiConfig = {
@@ -44,8 +50,7 @@ export default class SignupForm extends React.Component {
 				this.addUserFirebase(this.state.user)
 			} 
 		});
-	}		
-
+	}
 
 
    render() {
