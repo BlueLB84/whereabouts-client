@@ -16,12 +16,12 @@ export default class SignupForm extends React.Component {
 	}
 
 	addUserFirebase = (currentUser) => {
-		const userRef = firebase.database().ref('users');
-		const user = {
-			uid: currentUser.uid,
-			email: currentUser.email,
-			displayName: currentUser.displayName
-		}
+		// const userRef = firebase.database().ref('users');
+		// const user = {
+		// 	uid: currentUser.uid,
+		// 	email: currentUser.email,
+		// 	displayName: currentUser.displayName
+		// }
 		// const userKey = userRef.push(user).key;
 		console.log(currentUser);
 		console.log(currentUser.uid);
