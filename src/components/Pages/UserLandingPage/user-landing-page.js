@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {API_BASE_URL} from '../../config';
 
 import TitleCard from '../../Headers/TitleCard/title-card';
 import TeamSnippet from '../../Team/TeamSnippet/team-snippet';
@@ -8,6 +9,44 @@ import TeamSnippet from '../../Team/TeamSnippet/team-snippet';
 import './user-landing-page.css';
 
 export class UserLandingPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            users,
+            error: null,
+            loading: false
+        };
+    }
+
+    componentDidMount() {
+        this.loadUserTeams();
+    }
+
+    loadUserTeams() {
+        this.setState({
+            error: null,
+            loading: true
+        });
+        return fetch(`${API_BASE_URL}/users`)
+            .then(res => {
+                if (!res.ok) {
+                    return Promise.reject(res.statusText);
+                }
+                return res.json();
+            })
+            then(users => 
+                this.setState({
+                    users,
+                    loading: false
+                })
+            )
+            .catch(err => 
+                this.setState({
+                    error: 'Could not load user information',
+                    loading: false
+                })
+            );
+    }
 
     handleTeamClick(index) {
         this.props.history.push(`/team/${index}`);
