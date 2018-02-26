@@ -22,6 +22,7 @@ export class TeamHome extends React.Component {
             if (team.teamId === teamIdParam) {
                 return team;
             }
+            return false;
         })[0];
 
         const teamUsers = [];
@@ -30,6 +31,7 @@ export class TeamHome extends React.Component {
             if (currentTeam.users.includes(user.userId)) {
                 teamUsers.push(user);
             }
+            return false;
         });
     
         const whereabouts = teamUsers.map((user, index) => (

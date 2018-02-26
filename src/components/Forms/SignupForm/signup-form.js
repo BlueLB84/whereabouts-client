@@ -22,7 +22,7 @@ export default class SignupForm extends React.Component {
 			email: currentUser.email,
 			displayName: currentUser.displayName
 		}
-		const userKey = userRef.push(user).key;
+		// const userKey = userRef.push(user).key;
 		console.log(currentUser);
 		console.log(currentUser.uid);
 		auth.currentUser.getIdToken(true).then(function(idToken) {

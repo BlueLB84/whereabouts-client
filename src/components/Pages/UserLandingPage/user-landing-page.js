@@ -26,6 +26,7 @@ export class UserLandingPage extends React.Component {
             if (team.users.includes(userIdParam)) {
                 currentUserTeams.push(team);
             }
+            return false;
         });
 
         const teams = currentUserTeams.map((team, index) => (
