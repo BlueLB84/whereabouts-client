@@ -58,6 +58,36 @@ export const whereaboutsReducer = (state=initialState, action) => {
                 users: state.users.map((user, index) => index === userIndex ? {...user, whereabouts: {...action.whereabouts}} : user)
             }
         }
+        case `${actions.FETCH_USERS_REQUEST}` : {
+            return {
+                ...state,
+                loading: action.loading
+            }
+        }
+        case `${actions.FETCH_TEAMS_REQUEST}` : {
+            return {
+                ...state,
+                loading: action.loading
+            }
+        }
+        case `${actions.FETCH_USERS_SUCCESS}` : {
+            return action.users;
+        }
+        case `${actions.FETCH_TEAMS_SUCCESS}` : {
+            return action.teams;
+        }
+        case `${actions.FETCH_USERS_ERROR}` : {
+            return {
+                ...state,
+                error: action.error
+            }
+        }
+        case `${actions.FETCH_TEAMS_ERROR}` : {
+            return {
+                ...state,
+                error: action.error
+            }
+        }
         default : return state;
     }
 }
