@@ -22,11 +22,11 @@ export class UserLandingPage extends React.Component {
     render() {
         
         let body;
-        if (this.state.error) {
-            body = (<div className="message message-error">{this.state.error}</div>);
-        } else if (this.state.loading) {
+        if (this.props.error) {
+            body = (<div className="message message-error">{this.props.error}</div>);
+        } else if (this.props.loading) {
             body = (<div className="message message-default">Loading your information...</div>);
-        } else {
+        } else if (this.props.users && this.props.teams) {
             const userIdParam = this.props.match.params.userId;
 
             const currentUser = this.props.users.filter(user => 
@@ -78,7 +78,9 @@ export class UserLandingPage extends React.Component {
 
 const mapStateToProps = state => ({
     teams: state.teams,
-    users: state.users
+    users: state.users,
+    loading: state.loading,
+    error: state.error
 });
 
 export default connect(mapStateToProps)(UserLandingPage);
