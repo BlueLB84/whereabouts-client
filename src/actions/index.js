@@ -57,6 +57,11 @@ export const updateUser = (userId, usrname, email, imgSrc) => ({
 });
 
 // USERS API ACTIONS
+export const FETCH_USERS_REQUEST = 'FETCH_USERS_REQUEST';
+export const fetchUsersRequest = loading => ({
+	type: FETCH_USERS_REQUEST,
+	loading: true;
+}); 
 
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const fetchUsersSuccess = users => ({
@@ -71,6 +76,7 @@ export const fetchUsersError = err => ({
 });
 
 export const fetchUsers = () => dispatch => {
+	dispatch(fetchUsersRequest());
 	fetch(`${API_BASE_URL}/users`)
 	    .then(res => {
 	        if (!res.ok) {
@@ -82,11 +88,18 @@ export const fetchUsers = () => dispatch => {
 	        dispatch(fetchUsersSuccess(data.users));
 	    })
 	    .catch(err => {
+	    	console.error(err);
 	    	dispatch(fetchUsersError(err));
 	    });
 };
 
 // TEAMS API ACTIONS
+
+export const FETCH_TEAMS_REQUEST = 'FETCH_TEAMS_REQUEST';
+export const fetchTeamsRequest = loading => ({
+	type: FETCH_TEAMS_REQUEST,
+	loading: true;
+}); 
 
 export const FETCH_TEAMS_SUCCESS = 'FETCH_TEAMS_SUCCESS';
 export const fetchTeamsSuccess = teams => ({
@@ -101,6 +114,7 @@ export const fetchTeamsError = err => ({
 });
 
 export const fetchTeams = () => dispatch => {
+	dispatch(fetchTeamsRequest());
 	fetch(`${API_BASE_URL}/teams`)
 	    .then(res => {
 	        if (!res.ok) {
@@ -112,6 +126,7 @@ export const fetchTeams = () => dispatch => {
 	        dispatch(fetchTeamsSuccess(data.teams));
 	    })
 	    .catch(err => {
+	    	console.error(err);
 	    	dispatch(fetchTeamsError(err));
 	    });
 };
