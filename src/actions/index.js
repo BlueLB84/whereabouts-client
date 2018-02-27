@@ -1,3 +1,5 @@
+import { API_BASE_URL } from './../config';
+
 export const ADD_TEAM = 'ADD_TEAM';
 export const addTeam = (name, motto, imgSrc, bulletins, users) => ({
 	type: ADD_TEAM,
@@ -53,4 +55,64 @@ export const updateUser = (userId, usrname, email, imgSrc) => ({
 		imgSrc
 	}
 });
+
+// USERS API ACTIONS
+
+export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
+export const fetchUsersSuccess = users => ({
+	type: FETCH_USERS_SUCCESS,
+	users
+});
+
+export const FETCH_USERS_ERROR = 'FETCH_USERS_ERROR';
+export const fetchUsersError = err => ({
+	type: FETCH_USERS_ERROR,
+	err
+});
+
+export const fetchUsers = () => dispatch => {
+	fetch(`${API_BASE_URL}/users`)
+	    .then(res => {
+	        if (!res.ok) {
+	            return Promise.reject(res.statusText);
+	        }
+	        return res.json();
+	    })
+	    .then(data => {
+	        dispatch(fetchUsersSuccess(data.users));
+	    })
+	    .catch(err => {
+	    	dispatch(fetchUsersError(err));
+	    });
+};
+
+// TEAMS API ACTIONS
+
+export const FETCH_TEAMS_SUCCESS = 'FETCH_TEAMS_SUCCESS';
+export const fetchTeamsSuccess = teams => ({
+	type: FETCH_TEAMS_SUCCESS,
+	teams
+});
+
+export const FETCH_TEAMS_ERROR = 'FETCH_TEAMS_ERROR';
+export const fetchTeamsError = err => ({
+	type: FETCH_TEAMS_ERROR,
+	err
+});
+
+export const fetchTeams = () => dispatch => {
+	fetch(`${API_BASE_URL}/teams`)
+	    .then(res => {
+	        if (!res.ok) {
+	            return Promise.reject(res.statusText);
+	        }
+	        return res.json();
+	    })
+	    .then(data => {
+	        dispatch(fetchTeamsSuccess(data.teams));
+	    })
+	    .catch(err => {
+	    	dispatch(fetchTeamsError(err));
+	    });
+};
 
