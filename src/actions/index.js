@@ -58,15 +58,16 @@ export const updateUser = (userId, usrname, email, imgSrc) => ({
 
 // USERS API ACTIONS
 export const FETCH_USERS_REQUEST = 'FETCH_USERS_REQUEST';
-export const fetchUsersRequest = loading => ({
+export const fetchUsersRequest = () => ({
 	type: FETCH_USERS_REQUEST,
-	loading: true;
+	userLoading: true
 }); 
 
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const fetchUsersSuccess = users => ({
 	type: FETCH_USERS_SUCCESS,
-	users
+	users,
+	userLoading: false
 });
 
 export const FETCH_USERS_ERROR = 'FETCH_USERS_ERROR';
@@ -96,15 +97,16 @@ export const fetchUsers = () => dispatch => {
 // TEAMS API ACTIONS
 
 export const FETCH_TEAMS_REQUEST = 'FETCH_TEAMS_REQUEST';
-export const fetchTeamsRequest = loading => ({
+export const fetchTeamsRequest = () => ({
 	type: FETCH_TEAMS_REQUEST,
-	loading: true;
+	teamLoading: true
 }); 
 
 export const FETCH_TEAMS_SUCCESS = 'FETCH_TEAMS_SUCCESS';
 export const fetchTeamsSuccess = teams => ({
 	type: FETCH_TEAMS_SUCCESS,
-	teams
+	teams,
+	teamLoading: false
 });
 
 export const FETCH_TEAMS_ERROR = 'FETCH_TEAMS_ERROR';

@@ -2,19 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { fetchUsers, fetchTeams } from '../../../actions';
-
 import TitleCard from '../../Headers/TitleCard/title-card';
 import TeamSnippet from '../../Team/TeamSnippet/team-snippet';
 
 import './user-landing-page.css';
 
-export class UserLandingPage extends React.Component {
-    componentDidMount() {
-        this.props.dispatch(fetchUsers);
-        this.props.dispatch(fetchTeams);
-    }
-
+export default class UserLandingPage extends React.Component {
+    constructor (props){
+        super(props);
+    };
+    
     handleTeamClick(index) {
         this.props.history.push(`/team/${index}`);
     }
@@ -24,10 +21,10 @@ export class UserLandingPage extends React.Component {
         let body;
         if (this.props.error) {
             body = (<div className="message message-error">{this.props.error}</div>);
-        } else if (this.props.loading) {
+        } else if (this.props.userLoading || this.props.teamLoading) {
             body = (<div className="message message-default">Loading your information...</div>);
-        } else if (this.props.users && this.props.teams) {
-            const userIdParam = this.props.match.params.userId;
+        } else if (this.props.users.length && this.props.teams.length) {
+            const userIdParam = this.props.userId;
 
             const currentUser = this.props.users.filter(user => 
                 user.userId === userIdParam
@@ -75,15 +72,6 @@ export class UserLandingPage extends React.Component {
         );
     }
 };
-
-const mapStateToProps = state => ({
-    teams: state.teams,
-    users: state.users,
-    loading: state.loading,
-    error: state.error
-});
-
-export default connect(mapStateToProps)(UserLandingPage);
 
 
 
