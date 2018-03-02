@@ -1,24 +1,28 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+
+import PropTypes from 'prop-types';
+import { Link, withRouter } from 'react-router-dom';
 
 import TitleCard from '../../Headers/TitleCard/title-card';
 import TeamSnippet from '../../Team/TeamSnippet/team-snippet';
 
 import './user-landing-page.css';
 
-export default class UserLandingPage extends React.Component {
-    constructor (props){
-        super(props);
+class UserLandingPage extends React.Component {
+    static propTypes = {
+        match: PropTypes.object.isRequired,
+        location: PropTypes.object.isRequired,
+        history: PropTypes.object.isRequired
     };
-    
-    handleTeamClick(index) {
-        this.props.history.push(`/team/${index}`);
+
+    handleTeamClick(teamId, currentUser) {
+        this.props.history.push(`/team/${teamId}`);
     }
 
     render() {
-        
+
         let body;
+
         if (this.props.error) {
             body = (<div className="message message-error">{this.props.error}</div>);
         } else if (this.props.userLoading || this.props.teamLoading) {
@@ -72,6 +76,8 @@ export default class UserLandingPage extends React.Component {
         );
     }
 };
+
+export default withRouter(UserLandingPage);
 
 
 
