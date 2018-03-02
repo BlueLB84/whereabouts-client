@@ -2,7 +2,7 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
-import { addBulletin } from '../../../actions';
+import { addBulletinAxios } from '../../../actions';
 
 import './bulletin-form.css';
 
@@ -13,15 +13,14 @@ export class BulletinForm extends React.Component {
 		event.preventDefault();
 		const text = this.textInput.value.trim();
 		if (text && this.props.teamId !== undefined && this.props.userId !== undefined) {
-			this.addBulletin(this.textInput.value, this.props.teamId, this.props.userId);
-			// this.addBulletinFirebase(this.textInput.value, this.props.team);
+			this.addBulletinAxios(this.textInput.value, this.props.teamId, this.props.userId);
 		}
 
 		this.textInput.value = '';
 	}
 	
-	addBulletin(text, teamId, userId) {
-		this.props.dispatch(addBulletin(text, teamId, userId));
+	addBulletinAxios(text, teamId, userId) {
+		this.props.dispatch(addBulletinAxios(text, teamId, userId));
 	}
 
 	render() {

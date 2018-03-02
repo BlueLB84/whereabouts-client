@@ -3,7 +3,7 @@ import React from 'react';
 import './team-snippet.css';
 
 export default function TeamSnippet(props) {
-	console.log(props);
+
 	return (
 	    <div className="team-snippet" index={props.teamId} onClick={props.onClick}>
 	    	<div className="team-snippet--hover">

@@ -5,6 +5,7 @@ const initialState = {
     teams: [],
     userLoading: false,
     teamLoading: false,
+    bulletinLoading: false,
     error: null
 };
 
@@ -14,23 +15,6 @@ export const whereaboutsReducer = (state=initialState, action) => {
             return {
                 ...state,
                 teams: action.teamId
-            }
-        }
-        case `${actions.ADD_BULLETIN}` : {
-            let teamIndex;
-
-            state.teams.map((team, index) => {
-                if (team.teamId === action.teamId) {
-                    teamIndex = index;
-                }
-                return false;
-            });
-
-            const newBulletinsArr = [...state.teams[teamIndex].bulletins, action.bulletins];
-
-            return {
-                ...state,
-                teams: state.teams.map((team, index) => index === teamIndex ? {...team, bulletins: newBulletinsArr} : team)
             }
         }
         case `${actions.ADD_USER}` : {
@@ -97,6 +81,40 @@ export const whereaboutsReducer = (state=initialState, action) => {
                 ...state,
                 error: action.error,
                 teamLoading: false
+            }
+        }
+        case `${actions.ADD_BULLETIN_REQUEST}` : {
+            return {
+                ...state,
+                bulletinLoading: action.bulletinLoading
+            }
+        }
+        case `${actions.ADD_BULLETIN_SUCCESS}` : {
+            console.log(action);
+            let teamIndex;
+
+            state.teams.map((team, index) => {
+                if (team.teamId === action.teamId) {
+                    teamIndex = index;
+                }
+                return false;
+            });
+
+            const newBulletin = action.bulletins.slice(-1)[0];
+
+            const newBulletinsArr = [...state.teams[teamIndex].bulletins, newBulletin];
+
+            return {
+                ...state,
+                teams: state.teams.map((team, index) => index === teamIndex ? {...team, bulletins: newBulletinsArr} : team),
+                bulletinLoading: false
+            }
+        }
+        case `${actions.ADD_BULLETIN_ERROR}` : {
+            return {
+                ...state,
+                error: action.error,
+                bulletinLoading: false
             }
         }
         default : return state;

@@ -6,7 +6,14 @@ import './bulletin-post.css';
 export class BulletinPost extends React.Component {
     
     render() {
-		const username = this.props.users[this.props.userId].usrname;
+        let username;
+
+        this.props.users.map((user, index) => {
+            if (user.userId === this.props.userId) {
+                username = user.usrname;
+            }
+            return false;
+        });
     	
     	return (
 	        <div className="bulletin-post">

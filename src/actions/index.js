@@ -1,4 +1,5 @@
 import { API_BASE_URL } from './../config';
+import axios from 'axios';
 
 export const ADD_TEAM = 'ADD_TEAM';
 export const addTeam = (name, motto, imgSrc, bulletins, users) => ({
@@ -9,16 +10,6 @@ export const addTeam = (name, motto, imgSrc, bulletins, users) => ({
 		imgSrc,
 		bulletins,
 		users
-	}
-});
-
-export const ADD_BULLETIN = 'ADD_BULLETIN';
-export const addBulletin = (text, teamId, userId) => ({
-	type: ADD_BULLETIN,
-	teamId,
-	bulletins: {
-		userId,
-		text
 	}
 });
 
@@ -55,6 +46,48 @@ export const updateUser = (userId, usrname, email, imgSrc) => ({
 		imgSrc
 	}
 });
+
+export const ADD_BULLETIN_REQUEST = 'ADD_BULLETIN_REQUEST';
+export const addBulletinRequest = () => ({
+	type: ADD_BULLETIN_REQUEST,
+	bulletinLoading: true
+});
+
+export const ADD_BULLETIN_SUCCESS = 'ADD_BULLETIN_SUCCESS';
+export const addBulletinSuccess = data => ({
+	type: ADD_BULLETIN_SUCCESS,
+	bulletins: data.bulletins,
+	teamId: data.teamId,
+	bulletinLoading: false
+});
+
+export const ADD_BULLETIN_ERROR = 'ADD_BULLETIN_ERROR';
+export const addBulletinError = err => ({
+	type: ADD_BULLETIN_ERROR,
+	err
+});
+
+export const addBulletinAxios = (text, teamId, userId) => dispatch => {
+	dispatch(addBulletinRequest());
+	const bulletins = {
+		userId,
+		text
+	};
+	axios.put(`${API_BASE_URL}/teams/${teamId}`, { bulletins, teamId })
+	.then(res => {
+		if (res.status !== 202) {
+			return Promise.reject(res.statusText);
+		}
+		return res;
+	})
+	.then(res => {
+		dispatch(addBulletinSuccess(res.data));
+	})
+	.catch(err => {
+		console.error(err);
+		dispatch(addBulletinError(err));
+	})
+};
 
 // USERS API ACTIONS
 export const FETCH_USERS_REQUEST = 'FETCH_USERS_REQUEST';
