@@ -6,6 +6,7 @@ const initialState = {
     userLoading: false,
     teamLoading: false,
     bulletinLoading: false,
+    whereaboutsLoading: false,
     error: null
 };
 
@@ -27,20 +28,6 @@ export const whereaboutsReducer = (state=initialState, action) => {
             return {
                 ...state,
                 users: {...state.users, ...action.userId}
-            }
-        }
-        case `${actions.ADD_WHEREABOUTS}` : {
-            let userIndex;
-            state.users.map((user, index) => {
-                if (user.userId === action.userId) {
-                    userIndex = index;
-                }
-                return false;
-            });
-
-            return {
-                ...state,
-                users: state.users.map((user, index) => index === userIndex ? {...user, whereabouts: {...action.whereabouts}} : user)
             }
         }
         case `${actions.FETCH_USERS_REQUEST}` : {
@@ -90,7 +77,6 @@ export const whereaboutsReducer = (state=initialState, action) => {
             }
         }
         case `${actions.ADD_BULLETIN_SUCCESS}` : {
-            console.log(action);
             let teamIndex;
 
             state.teams.map((team, index) => {
@@ -115,6 +101,33 @@ export const whereaboutsReducer = (state=initialState, action) => {
                 ...state,
                 error: action.error,
                 bulletinLoading: false
+            }
+        }
+        case `${actions.ADD_WHEREABOUTS_REQUEST}` : {
+            return {
+                ...state,
+                whereaboutsLoading: action.whereaboutsLoading
+            }
+        }
+        case `${actions.ADD_WHEREABOUTS_SUCCESS}` : {
+            let userIndex;
+            state.users.map((user, index) => {
+                if (user.userId === action.userId) {
+                    userIndex = index;
+                }
+                return false;
+            });
+
+            return {
+                ...state,
+                users: state.users.map((user, index) => index === userIndex ? {...user, whereabouts: {...action.whereabouts}} : user)
+            }
+        }
+        case `${actions.ADD_WHEREABOUTS_ERROR}` : {
+            return {
+                ...state,
+                error: action.error,
+                whereaboutsLoading: false
             }
         }
         default : return state;

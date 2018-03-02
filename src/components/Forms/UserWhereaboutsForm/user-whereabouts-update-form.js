@@ -1,25 +1,26 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+
+import { addWhereaboutsAxios } from '../../../actions';
+
 import './user-whereabouts-update-form.css';
 
-export default class UserWhereaboutsForm extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			whereabouts: []
-		}
-		this.onSubmit = this.onSubmit.bind(this);
-	}
+export class UserWhereaboutsForm extends React.Component {
 
-	onSubmit(event) {
+	onSubmit = event => {
 		event.preventDefault();
 		const location = this.locationInput.value.trim();
 		const activity = this.activityInput.value.trim();
 		if (location && activity && this.props.userId !== undefined) {
-			this.props.addWhereabouts(this.locationInput.value, this.activityInput.value, this.props.userId);
+			this.addWhereaboutsAxios(this.locationInput.value, this.activityInput.value, this.props.userId);
 		}
 		this.locationInput.value = '';
 		this.activityInput.value = '';
+	}
+
+	addWhereaboutsAxios(location, activity, userId) {
+		this.props.dispatch(addWhereaboutsAxios(location, activity, userId));
 	}
 
 	render() {
@@ -39,3 +40,5 @@ export default class UserWhereaboutsForm extends React.Component {
     	);
 	} 
 }
+
+export default connect()(UserWhereaboutsForm);

@@ -13,16 +13,6 @@ export const addTeam = (name, motto, imgSrc, bulletins, users) => ({
 	}
 });
 
-export const ADD_WHEREABOUTS = 'ADD_WHEREABOUTS';
-export const addWhereabouts = (location, activity, userId) => ({
-	type: ADD_WHEREABOUTS,
-	userId,
-	whereabouts: {
-		location,
-		activity
-	}
-});
-
 export const ADD_USER = 'ADD_USER';
 export const addUser = (userId, usrname, email, imgSrc, location, activity) => ({
 	type: ADD_USER,
@@ -46,6 +36,59 @@ export const updateUser = (userId, usrname, email, imgSrc) => ({
 		imgSrc
 	}
 });
+
+// export const ADD_WHEREABOUTS = 'ADD_WHEREABOUTS';
+// export const addWhereabouts = (location, activity, userId) => ({
+// 	type: ADD_WHEREABOUTS,
+// 	userId,
+// 	whereabouts: {
+// 		location,
+// 		activity
+// 	}
+// });
+
+
+export const ADD_WHEREABOUTS_REQUEST = 'ADD_WHEREABOUTS_REQUEST';
+export const addWhereaboutsRequest = () => ({
+	type: ADD_WHEREABOUTS_REQUEST,
+	whereaboutsLoading: true
+});
+
+export const ADD_WHEREABOUTS_SUCCESS = 'ADD_WHEREABOUTS_SUCCESS';
+export const addWhereaboutsSuccess = data => ({
+	type: ADD_WHEREABOUTS_SUCCESS,
+	whereabouts: data.whereabouts,
+	userId: data.userId,
+	whereaboutsLoading: false
+});
+
+export const ADD_WHEREABOUTS_ERROR = 'ADD_WHEREABOUTS_ERROR';
+export const addWhereaboutsError = err => ({
+	type: ADD_WHEREABOUTS_ERROR,
+	err
+});
+
+export const addWhereaboutsAxios = (location, activity, userId) => dispatch => {
+	dispatch(addWhereaboutsRequest());
+	const whereabouts = {
+		location,
+		activity
+	};
+	axios.put(`${API_BASE_URL}/users/${userId}`, { whereabouts, userId })
+	.then(res => {
+		if (res.status !== 202) {
+			return Promise.reject(res.statusText);
+		}
+		return res;
+	})
+	.then(res => {
+		dispatch(addWhereaboutsSuccess(res.data));
+	})
+	.catch(err => {
+		console.error(err);
+		dispatch(addWhereaboutsError(err));
+	})
+};
 
 export const ADD_BULLETIN_REQUEST = 'ADD_BULLETIN_REQUEST';
 export const addBulletinRequest = () => ({
