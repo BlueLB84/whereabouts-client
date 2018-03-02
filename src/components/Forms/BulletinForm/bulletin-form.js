@@ -8,7 +8,6 @@ import './bulletin-form.css';
 
 export class BulletinForm extends React.Component {
 	
-
 	onSubmit = event => {
 		event.preventDefault();
 		const text = this.textInput.value.trim();
