@@ -1,8 +1,10 @@
 import * as actions from '../actions';
 
 const initialState = {
+    currentUser: null,
     users: [],
     teams: [],
+    checkUserLoading: false,
     userLoading: false,
     teamLoading: false,
     bulletinLoading: false,
@@ -30,16 +32,11 @@ export const whereaboutsReducer = (state=initialState, action) => {
                 users: {...state.users, ...action.userId}
             }
         }
+        // Get USERS data
         case `${actions.FETCH_USERS_REQUEST}` : {
             return {
                 ...state,
                 userLoading: action.userLoading
-            }
-        }
-        case `${actions.FETCH_TEAMS_REQUEST}` : {
-            return {
-                ...state,
-                teamLoading: action.teamLoading
             }
         }
         case `${actions.FETCH_USERS_SUCCESS}` : {
@@ -49,18 +46,25 @@ export const whereaboutsReducer = (state=initialState, action) => {
                 userLoading: false
             }
         }
-        case `${actions.FETCH_TEAMS_SUCCESS}` : {
-            return {
-                ...state,
-                teams: action.teams,
-                teamLoading: false
-            }
-        }
         case `${actions.FETCH_USERS_ERROR}` : {
             return {
                 ...state,
                 error: action.error,
                 userLoading: false
+            }
+        }
+        // Get TEAMS data
+        case `${actions.FETCH_TEAMS_REQUEST}` : {
+            return {
+                ...state,
+                teamLoading: action.teamLoading
+            }
+        }
+        case `${actions.FETCH_TEAMS_SUCCESS}` : {
+            return {
+                ...state,
+                teams: action.teams,
+                teamLoading: false
             }
         }
         case `${actions.FETCH_TEAMS_ERROR}` : {
@@ -70,6 +74,7 @@ export const whereaboutsReducer = (state=initialState, action) => {
                 teamLoading: false
             }
         }
+        // Add Team bulletin
         case `${actions.ADD_BULLETIN_REQUEST}` : {
             return {
                 ...state,
@@ -103,6 +108,7 @@ export const whereaboutsReducer = (state=initialState, action) => {
                 bulletinLoading: false
             }
         }
+        // Update User whereabouts
         case `${actions.ADD_WHEREABOUTS_REQUEST}` : {
             return {
                 ...state,
