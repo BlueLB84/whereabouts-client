@@ -37,17 +37,6 @@ export const updateUser = (userId, usrname, email, imgSrc) => ({
 	}
 });
 
-// export const ADD_WHEREABOUTS = 'ADD_WHEREABOUTS';
-// export const addWhereabouts = (location, activity, userId) => ({
-// 	type: ADD_WHEREABOUTS,
-// 	userId,
-// 	whereabouts: {
-// 		location,
-// 		activity
-// 	}
-// });
-
-
 export const ADD_WHEREABOUTS_REQUEST = 'ADD_WHEREABOUTS_REQUEST';
 export const addWhereaboutsRequest = () => ({
 	type: ADD_WHEREABOUTS_REQUEST,
