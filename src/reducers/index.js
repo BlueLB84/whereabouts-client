@@ -32,6 +32,34 @@ export const whereaboutsReducer = (state=initialState, action) => {
                 users: {...state.users, ...action.userId}
             }
         }
+        // LOGOUT user
+        case `${actions.LOGOUT_USER}` : {
+            return {
+                ...state,
+                currentUser: action.currentUser
+            }
+        }
+        // Check if user exists on login
+        case `${actions.CHECK_USER_EXISTS_REQUEST}` : {
+            return {
+                ...state,
+                checkUserLoading: action.checkUserLoading
+            }
+        }
+        case `${actions.CHECK_USER_EXISTS_SUCCESS}` : {
+            return {
+                ...state,
+                currentUser: action.currentUser,
+                checkUserLoading: false
+            }
+        }
+        case `${actions.CHECK_USER_EXISTS_ERROR}` : {
+            return {
+                ...state,
+                error: action.error,
+                checkUserLoading: false
+            }
+        }
         // Get USERS data
         case `${actions.FETCH_USERS_REQUEST}` : {
             return {

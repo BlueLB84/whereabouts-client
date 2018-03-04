@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect, Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
@@ -7,29 +8,11 @@ import SubtitleCard from '../../Headers/SubtitleCard/subtitle-card';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase, { auth } from '../../../firebase';
 
-import { checkUserExists } from '../../../actions';
+import { checkUserExists, logoutUser } from '../../../actions';
 
 import './signup-form.css';
 
 export class SignupForm extends React.Component {
-
-
-	// addUserFirebase = (currentUser) => {
-	// 	// const userRef = firebase.database().ref('users');
-	// 	// const user = {
-	// 	// 	uid: currentUser.uid,
-	// 	// 	email: currentUser.email,
-	// 	// 	displayName: currentUser.displayName
-	// 	// }
-	// 	// const userKey = userRef.push(user).key;
-	// 	console.log(currentUser);
-	// 	console.log(currentUser.uid);
-	// 	auth.currentUser.getIdToken(true).then(function(idToken) {
-	// 		console.log(idToken);
-	// 		// Send token to your backend via HTTPS
-	// 		// ...
-	// 	});
-	// }
 
 	uiConfig = {
 		signInFlow: 'popup',
@@ -42,10 +25,9 @@ export class SignupForm extends React.Component {
 		}
 	};
 
-	componentWillMount() {
+	componentDidMount() {
 		auth.onAuthStateChanged((user) => {
 			if (user) {
-				console.log(user.uid);
 				this.checkUserExists(user.uid);
 			} 
 		});
@@ -55,8 +37,12 @@ export class SignupForm extends React.Component {
 		this.props.dispatch(checkUserExists(userUID));
 	}
 
-	render() {
+	logoutUser() {
+		this.props.dispatch(logoutUser());
+	}
 
+	render() {
+		
 		if (!this.props.currentUser) {
 			return (
 	        <div>
@@ -77,11 +63,15 @@ export class SignupForm extends React.Component {
             	<SubtitleCard />
 	        </header>
 	        <section>
-	        	
-	        	<p onClick={() => {firebase.auth().signOut(); this.setState({ user: null });}}>Sign-out</p>
+	        	<h3>Welcome {this.props.currentUser.usrname}</h3>
+	        	<Link to={`/user/${this.props.currentUser.userId}`}>Go To Your User Homepage</Link>
+	        	<p onClick={() => {firebase.auth().signOut(); this.logoutUser();}}>Sign-out</p>
 	        </section>
 			</div>
-		)
+			)
+			 
+			
+		
 	}
 };
 
@@ -91,4 +81,4 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect()(SignupForm);
+export default connect(mapStateToProps)(SignupForm);

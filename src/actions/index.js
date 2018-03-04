@@ -1,46 +1,6 @@
+
 import { API_BASE_URL } from './../config';
 import axios from 'axios';
-
-
-
-
-
-export const CHECK_USER_EXISTS_REQUEST = 'CHECK_USER_EXISTS_REQUEST';
-export const checkUserExistsRequest = () => ({
-	type: CHECK_USER_EXISTS_REQUEST,
-	checkUserLoading: true
-});
-
-export const CHECK_USER_EXISTS_SUCCESS = 'CHECK_USER_EXISTS_SUCCESS';
-export const checkUserExistsSuccess = data => ({
-	type: CHECK_USER_EXISTS_SUCCESS,
-	currentUser: data,
-	checkUserLoading: false
-});
-
-export const CHECK_USER_EXISTS_ERROR = 'CHECK_USER_EXISTS_ERROR';
-export const checkUserExistsError = err => ({
-	type: CHECK_USER_EXISTS_ERROR,
-	err
-});
-
-export const checkUserExists = (userUID) => dispatch => {
-	dispatch(checkUserExistsRequest());
-	axios.get(`${API_BASE_URL}/login/${userUID}`, { userUID })
-	.then(res => {
-		if (res.status !== 200) {
-			return Promise.reject(res.statusText);
-		}
-		return res;
-	})
-	.then(res => {
-		dispatch(checkUserExistsSuccess(res.data));
-	})
-	.catch(err => {
-		console.error(err);
-		dispatch(checkUserExistsError(err));
-	})
-};
 
 export const ADD_TEAM = 'ADD_TEAM';
 export const addTeam = (name, motto, imgSrc, bulletins, users) => ({
@@ -77,6 +37,43 @@ export const updateUser = (userId, usrname, email, imgSrc) => ({
 		imgSrc
 	}
 });
+
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const logoutUser = () => ({
+	type: LOGOUT_USER,
+	currentUser: null
+});
+
+export const CHECK_USER_EXISTS_REQUEST = 'CHECK_USER_EXISTS_REQUEST';
+export const checkUserExistsRequest = () => ({
+	type: CHECK_USER_EXISTS_REQUEST,
+	checkUserLoading: true
+});
+
+export const CHECK_USER_EXISTS_SUCCESS = 'CHECK_USER_EXISTS_SUCCESS';
+export const checkUserExistsSuccess = data => ({
+	type: CHECK_USER_EXISTS_SUCCESS,
+	currentUser: data,
+	checkUserLoading: false
+});
+
+export const CHECK_USER_EXISTS_ERROR = 'CHECK_USER_EXISTS_ERROR';
+export const checkUserExistsError = err => ({
+	type: CHECK_USER_EXISTS_ERROR,
+	err
+});
+
+export const checkUserExists = (userUID) => dispatch => {
+	dispatch(checkUserExistsRequest());
+	axios.get(`${API_BASE_URL}/login/${userUID}`)
+	.then(res => {
+		dispatch(checkUserExistsSuccess(res.data));
+	})
+	.catch(err => {
+		console.error(err);
+		dispatch(checkUserExistsError(err));
+	})
+};
 
 export const ADD_WHEREABOUTS_REQUEST = 'ADD_WHEREABOUTS_REQUEST';
 export const addWhereaboutsRequest = () => ({
