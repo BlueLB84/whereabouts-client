@@ -1,9 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { fetchUsers, fetchTeams } from '../../actions';
+import {connect} from 'react-redux';
+import requiresLogin from '../requires-login';
+import {fetchUsers, fetchTeams} from '../../actions/protected-data';
 
 import UserLandingPage from '../Pages/UserLandingPage/user-landing-page';
-import TeamHome from '../Pages/TeamHome/team-home-page';
+import TeamHomePage from '../Pages/TeamHomePage/team-home-page';
 
 export class UserTeamLandingPageContainer extends React.Component {
 	componentDidMount() {
@@ -20,7 +21,7 @@ export class UserTeamLandingPageContainer extends React.Component {
             body = (<UserLandingPage users={this.props.users} teams={this.props.teams} error={this.props.error} userLoading={this.props.userLoading} teamLoading={this.props.teamLoading} userId={this.props.match.params.userId} />)
         }
         if (paramsType === "teamId") {
-            body = (<TeamHome users={this.props.users} teams={this.props.teams} error={this.props.error} userLoading={this.props.userLoading} teamLoading={this.props.teamLoading} teamId={this.props.match.params.teamId} />)    
+            body = (<TeamHomePage users={this.props.users} teams={this.props.teams} error={this.props.error} userLoading={this.props.userLoading} teamLoading={this.props.teamLoading} teamId={this.props.match.params.teamId} />)    
         }
         return (
             <div className="user-team-page-container">
@@ -40,4 +41,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps)(UserTeamLandingPageContainer);
+export default requiresLogin()(connect(mapStateToProps)(UserTeamLandingPageContainer));

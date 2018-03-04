@@ -1,9 +1,14 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {Link, Redirect} from 'react-router-dom';
 import SubtitleCard from '../../Headers/SubtitleCard/subtitle-card';
 import './landing-page.css';
 
-export default function LandingPage(props) {
+export function LandingPage(props) {
+	if (props.loggedIn) {
+		return <Redirect to="/user/:userid" />;
+	}
+
     return (
         <div className="landing-page">
             <header role="banner">
@@ -25,22 +30,17 @@ export default function LandingPage(props) {
 		        <p>Pin important messages for your team.</p>
 		    </section>
 		    <section>
-		        <header>
-		        	<h3>Keep important team contact information in one place</h3>
-		        </header>
-		        <p>[<em>placeholder for screenshot of team contact information interface</em>]</p>
-		        <p>Contact information made simple.</p>
-		    </section>
-		    <section>
 		    	<header>
-		        	<h3>Want to bring your team to Whereabouts?</h3>
-		        	<Link to='/signup'>Start A New Whereabouts Team!</Link>
+		        	<h3>New Whereabouts User?</h3>
+		        	<Link to='/register'>Join Whereabouts!</Link>
 		        </header>
 		    </section>
         </div>
     );
 };
 
-LandingPage.defaultProps = {
+const mapStateToProps = state => ({
+	loggedIn: state.auth.currentUser !== null
+});
 
-};
+export default connect(mapStateToProps)(LandingPage);
